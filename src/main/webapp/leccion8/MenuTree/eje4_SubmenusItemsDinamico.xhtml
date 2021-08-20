@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../WEB-INF/plantillas/frmPlantillaSideBar.xhtml">
+
+    <ui:define name="left">
+        <h:form>
+            <p:tree id="mainmnu" value="#{SubMenusTreeItemsDinamicoDB.nodoMenu}" 
+                    selection="#{SubMenusTreeItemsDinamicoDB.seleccionarNodo}"
+                    selectionMode="checkbox"
+                    var="node" style="width: 90%"
+                    >
+                <p:treeNode expandedIcon="pi pi-folder-open" collapsedIcon="pi pi-folder">
+                    <h:outputLink value="#{node}">
+                        <h:outputText value="#{node}"/>
+                    </h:outputLink>
+                </p:treeNode>
+            </p:tree>
+
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+        <p:outputPanel style="display:block">
+            <h3 style="text-align: left">Ejemplo #4 de Tree SubMenu e Items Dinamicos  con conexión a Base de datos</h3>
+        </p:outputPanel>
+        <br/>
+        <p>
+            Este ejemplo consume los siguentes metodos:<br/><br/>
+
+            La clase eje4_SubMenusItemsDinamicoDB.java<br/>
+            Es la encargada de exponer y procesador los datos del cliente o usuario.<br/>
+            Este medoto es invocado en la pagina web o front-end.<br/><br/>
+
+            La clase MenuController.java es un Stateless que provee la logica de<br/>
+            operacion transaccional de la tabla CatMenu.<br/>
+            este metodo es invocado en el back-end<br/>
+
+        </p>
+            <p:linkButton value="Submenu" outcome="/leccion8/MenuTree/MenuTree?faces-redirect=true"/>
+          
+    </ui:define>
+
+
+</ui:composition>

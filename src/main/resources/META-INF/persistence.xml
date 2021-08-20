@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="dbLeccionesPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>model.CatCeaten</class>
+    <class>model.CatPais</class>
+    <class>model.CatVacunas</class>
+    <class>model.MaePersonas</class>
+    <class>model.MaeVacunacion</class>
+    <class>model.PersonasMae</class>
+    <class>model.PersonasDireccion</class>
+    <class>model.CatProductos</class>
+    <class>model.FacturaMae</class>
+    <class>model.FacturaDet</class>
+    <class>model.CatMenu</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
+    <validation-mode>NONE</validation-mode>
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://192.168.0.112:1433;databaseName=dbLecciones"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.password" value="root.8"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServer2012Dialect"/>
+      <property name="hibernate.connection.autocommit" value="true"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+        
+    </properties>
+  </persistence-unit>
+</persistence>

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+
+    <ui:define name="content">
+        <h:head>
+            <title>Consumir un Procedimient almacenado</title>
+        </h:head>
+
+        <h:body>
+
+
+            <h:form style="margin-top: 15px">
+
+                <p:growl id="growl" showDetail="true" />
+
+                <h:panelGrid columns="6" style="margin-top: 5px" >
+                    <label for="x">Fecha desde.:</label>
+                    <p:datePicker value="#{storeProcedureView.fec_desde}" size="20">
+                       
+                    </p:datePicker>
+
+                    <label for="y">Fecha hasta.:</label>
+                    <p:datePicker  value="#{storeProcedureView.fec_hasta}" size="20">
+                    
+                    </p:datePicker>
+
+                    <p:commandButton value="Consumir"
+                                     styleClass="rounded-button ui-button-success"
+                                     action="#{storeProcedureView.cmdContarPersonas()}"
+                                     update="lblresultado,growl">
+                    </p:commandButton>
+
+                    <p:button  value="Cancelar" outcome="/index" styleClass="rounded-button ui-button-secondary" />
+
+                </h:panelGrid>
+
+                <p:divider/>
+
+                <div class="p-field ui-fluid">
+                    <label for="lblresultado">Resultado de la suma.:</label>
+                    <p:inputNumber id="lblresultado"  value="#{storeProcedureView.var_suma}"  readonly="true" />
+                </div>
+
+
+            </h:form>
+
+
+        </h:body>
+    </ui:define>
+
+</ui:composition>

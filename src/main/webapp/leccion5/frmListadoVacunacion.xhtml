@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+    <ui:define name="content">
+        <h:head>
+            <title>Listado de vacunaci&oacute;n</title>
+        </h:head>
+
+        <h:body>
+            <h4  style="text-align:  center">Componente DataTable &oacute; grilla</h4>
+            <h:form id="frmMain"  style="width: 90%">
+                <p:button  outcome="/index" icon="pi pi-home" 
+                           title= "Volver al menu" styleClass="rounded-button ui-button-secondary"/>      
+
+                <p:commandButton  icon="pi pi-file-excel"
+                                  title="Exportar a Excel 1997-2003"
+                                  styleClass="rounded-button ui-button-success">
+                    <p:dataExporter type="xls" target="tbl" fileName="listadoVacunacion_xls"/>
+                </p:commandButton>
+
+                <p:commandButton  icon="pi pi-file-excel"  title="Exportar a XLXS" styleClass="rounded-button ui-button-info">
+                    <p:dataExporter type="xlsxstream" target="tbl" fileName="listadoVacunacion_xlxs"/>
+                </p:commandButton>
+
+                <p:commandButton  icon="pi pi-file-pdf"
+                                  style="margin-bottom: 10px"
+                                  styleClass="rounded-button ui-button-danger"
+                                  title="Exportar a pdf">
+                    <p:dataExporter type="pdf" target="tbl" fileName="listadoVacunacion_pdf"/>
+                </p:commandButton>
+
+               <p:dataTable id="tbl" value="#{maestroVacunacionesView.lista}" 
+                             var="mae" 
+                             widgetVar="gridPaises"
+                             rows="8"
+                             paginator="true"
+                             size="small"
+                             >
+                    <p:column  headerText="Expendiente Id."  style="width: 10%">
+                        <h:outputText value="#{mae.vacunacionId}" />
+                    </p:column>
+                    <p:column   headerText="Nombre paciente"
+                                filterBy="#{mae.nombrePaciente}"
+                                filterMatchMode="contains" >
+                        <h:outputText value="#{mae.nombrePaciente}" />
+                    </p:column>
+                    <p:column  headerText="Edad" filterBy="#{mae.edad}"
+                               style="text-align: center" 
+                               width="5%" filterMatchMode="exact">
+                        <h:outputText value="#{mae.edad}"/>
+                    </p:column>
+
+                    <p:column   headerText="Centro de atencion"
+                                filterBy="#{mae.catCeaten.descripcionCeaten}"
+                                filterMatchMode="contains"
+                                width="20%">
+                        <h:outputText value="#{mae.catCeaten.descripcionCeaten}" />
+                    </p:column>
+
+                    <p:column   headerText="Vacuna aplicada"
+                                filterBy="#{mae.catVacunas.descripcionVacuna}"
+                                filterMatchMode="contains" 
+                                width="20%">
+                        <h:outputText value="#{mae.catVacunas.descripcionVacuna}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <span class="p-text-bold">Total de registros.:  #{maestroVacunacionesView.lista.size()}</span>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+        </h:body>        
+    </ui:define>
+</ui:composition>
+

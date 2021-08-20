@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+
+    <ui:define name="content">
+        <h:head>
+            <title>Buscar por rango de fechas</title>
+        </h:head>
+
+        <h:body>
+
+
+            <h:form id="frmMain">
+                <p:growl  id="growl" showDetail="true" />
+                <h5>Filtro por rango de fechas</h5>
+
+                <h:panelGrid columns="6">
+                    <p:outputLabel value="Fec. Inicio.:"/>
+                    <p:datePicker value="#{buscarFechas.var_fecDesde}" size="15" pattern="dd/MM/yyyy"/>
+                    
+                    <p:outputLabel value="Fec. final.:"/>
+                    <p:datePicker value="#{buscarFechas.var_fecHasta}"  size="15" pattern="dd/MM/yyyy"/>
+                   
+                    <p:commandButton  icon="pi pi-search"
+                                      action="#{buscarFechas.cmdListarPorRangoFechas}"
+                                      style="margin-left: 5px;"
+                                      update="tbl,growl"
+                                      title="Buscar por rango de fecha"
+                                      styleClass="rounded-button ui-button-success">
+                    </p:commandButton>
+                    <p:button   
+                          style="margin-left: 5px;"
+                        outcome="/index" icon="pi pi-home" 
+                               title= "Volver al menu" styleClass="rounded-button ui-button-secondary"/>      
+
+
+                </h:panelGrid>
+
+                <br/><br/>
+                <p:dataTable id="tbl" value="#{buscarFechas.lista}" 
+                             var="mae" 
+                             rows="8"
+                             paginator="true"
+                             size="small">
+                    <p:column  headerText="Expendiente Id."  style="width: 10%">
+                        <h:outputText value="#{mae.vacunacionId}" />
+                    </p:column>
+                    <p:column headerText="Fec. Vacunacion" sortBy="#{mae.fecVacunacion}" sortable="true">
+                        <h:outputText value="#{mae.fecVacunacion}">
+                         <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
+                        
+                    </p:column>
+                    
+                    <p:column   headerText="Nombre paciente"
+                                filterBy="#{mae.nombrePaciente}"
+                                filterMatchMode="contains" >
+                        <h:outputText value="#{mae.nombrePaciente}" />
+                    </p:column>
+                    <p:column  headerText="Edad" filterBy="#{mae.edad}"
+                               style="text-align: center" 
+                               width="5%" filterMatchMode="exact">
+                        <h:outputText value="#{mae.edad}"/>
+                    </p:column>
+
+                    <p:column   headerText="Centro de atencion"
+                                filterBy="#{mae.catCeaten.descripcionCeaten}"
+                                filterMatchMode="contains"
+                                width="20%">
+                        <h:outputText value="#{mae.catCeaten.descripcionCeaten}" />
+                    </p:column>
+
+                    <p:column   headerText="Vacuna aplicada"
+                                filterBy="#{mae.catVacunas.descripcionVacuna}"
+                                filterMatchMode="contains" 
+                                width="20%">
+                        <h:outputText value="#{mae.catVacunas.descripcionVacuna}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <span class="p-text-bold">Total de registros.:  #{buscarFechas.lista.size()}</span>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+
+        </h:body>
+    </ui:define>
+
+</ui:composition>

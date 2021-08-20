@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+
+    <ui:define name="content">
+        <h:head>
+            <title>Facelet Title</title>
+        </h:head>
+        <h:body>
+            <p:panel header="Consumiendo un Webservice con JAX-WS">
+                <h:form id="form">
+                    <p:outputLabel  id="lblnombre" value="Nombre.:"/><br/>
+                    <p:inputText value="#{consumirWebService.nombre}"/>
+                    <p:commandButton value="Ejecutar"  style="margin-left: 5px"
+                                     action="#{consumirWebService.cmdSaludar}"
+                                     update="form:lblrespuesta"/>
+                    <p:commandButton value="Listar Paises"  style="margin-left: 5px"
+                                     action="#{consumirWebService.cmdListarPaises}"
+                                     update=":frmListado"/>
+
+                    <p:divider/>
+                    <p:outputLabel  id="lblrespuesta" value="#{consumirWebService.respuesta}"/>
+
+                </h:form>
+            </p:panel>
+
+            <h:form id="frmListado">
+                <p:dataTable id="tbpais" value="#{consumirWebService.listarPaises}"
+                             emptyMessage="No hay datos cargados"
+                             var="pais" 
+                             rows="8"
+                             paginator="true"
+                             size="small"
+                             >
+                    <p:column   style="width: 10%">
+                        <f:facet name="header">
+                            Cod.  Pais
+                        </f:facet>
+
+                        <h:outputText value="#{pais.paisId}" />
+                    </p:column>
+                    <p:column  
+                        filterBy="#{pais.descripPais}"
+                        filterMatchMode="contains" >
+                        <f:facet name="header">
+                            Descripcion del pais
+                        </f:facet>
+                        <h:outputText value="#{pais.descripPais}" />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+
+
+        </h:body>
+    </ui:define>
+
+
+</ui:composition>
+
+

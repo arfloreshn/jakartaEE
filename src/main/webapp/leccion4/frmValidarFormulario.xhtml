@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+    <ui:define name="content">
+        <h:head>
+            <title>Maestro de vacunacion</title>
+        </h:head>
+        <div class="ui container">
+            <h:body>
+                <script type="text/javascript">
+                    PrimeFaces.locales['es'] = {
+                        closeText: 'Cerrar',
+                        prevText: 'Anterior',
+                        nextText: 'Siguiente',
+                        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+                        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                        dayNamesMin: ['D', 'L', 'M', 'X', 'J', 'V', 'S'],
+                        weekHeader: 'Semana',
+                        firstDay: 1,
+                        isRTL: false,
+                        showMonthAfterYear: false,
+                        yearSuffix: '',
+                        timeOnlyTitle: 'Sólo hora',
+                        timeText: 'Tiempo',
+                        hourText: 'Hora',
+                        minuteText: 'Minuto',
+                        secondText: 'Segundo',
+                        currentText: 'Fecha actual',
+                        ampm: false,
+                        month: 'Mes',
+                        week: 'Semana',
+                        day: 'Día',
+                        allDayText: 'Todo el día',
+                        today: 'Hoy',
+                        clear: 'Claro'
+                    };
+                </script>
+
+                <h2 class="ui header">
+                    <h:graphicImage library="img" name="covid-19.jpg"  class="ui image"/>
+                    <h3>Registro de vacunaci&oacute;n</h3>    
+                </h2>
+                <p:divider/>
+                <h:form id="frmmain">
+                    <p:growl id="growl" showDetail="true" />
+                    <p:growl id="growl-sticky" for="sticky-key" showDetail="true" sticky="true" />
+
+                    <p:messages id="messages" showDetail="true" closable="true">
+                        <p:autoUpdate/>
+                    </p:messages>
+
+
+                    <div class="ui grid">
+                        <div class="eight wide column">
+                            <h:panelGrid  id="panel1" columns="1">
+                                <p:outputLabel for="txtnomPaciente" value="Nombre de paciente:"/>
+                                <p:inputText id="txtnomPaciente" value="#{maestroVacunacionesView.maeVacunacion.nombrePaciente}" size="40" required="true"/>
+                                <p:message for="txtnomPaciente"/>
+
+                                <p:outputLabel for="txtEdad" value="Edad:"/>
+                                <p:inputNumber id="txtEdad" value="#{maestroVacunacionesView.maeVacunacion.edad}" 
+                                               emptyValue="empty" minValue="0" maxValue="120"  required="true"/>
+                                <p:message for="txtEdad"/>
+
+
+                                <p:outputLabel value="Estatura:"/>
+                                <p:inputNumber value="#{maestroVacunacionesView.maeVacunacion.estatura}" />
+
+                                <p:outputLabel value="Peso:"/>
+                                <p:inputNumber value="#{maestroVacunacionesView.maeVacunacion.peso}" />
+
+                                <p:outputLabel  for="cboEstadoCivil" value="Estado Civil.:"/>
+                                <p:selectOneMenu id="cboEstadoCivil" 
+                                                 value="#{maestroVacunacionesView.maeVacunacion.estadoCivil}" style="width: 250px" >
+                                    <f:selectItem itemLabel="Seleccione el estado civil" itemValue=""/>
+                                    <f:selectItem itemLabel="Soltero(a)" itemValue="S"/>
+                                    <f:selectItem itemLabel="Casado(a)" itemValue="C"/>
+                                    <f:selectItem itemLabel="Divorciado(a)" itemValue="D"/>
+                                    <f:selectItem itemLabel="Viudo(a)" itemValue="V"/>
+                                    <f:selectItem itemLabel="Union de hecho" itemValue="U"/>
+
+                                </p:selectOneMenu>
+                                <p:message for="cboEstadoCivil"/>
+
+                            </h:panelGrid>
+
+                        </div>
+                        <div class="eight wide column">
+                            <h:panelGrid columns="1" >
+
+                                <p:outputLabel for="cboTipoVacuna" value="Vacuna aplicada:"/>
+                                <p:selectOneMenu id="cboTipoVacuna" 
+                                                 value="#{maestroVacunacionesView.codVacuna}"  
+                                                 style="width: 250px" 
+                                                 required="true"
+                                                 requiredMessage="Seleccione una marca de vacuna">
+                                    <f:selectItem itemLabel="Seleccionar vacuna" itemValue="" />
+                                    <f:selectItems value="#{maestroVacunacionesView.vacunas}" var="vacuna"  
+                                                   itemLabel="#{vacuna.descripcionVacuna}"
+                                                   itemValue="#{vacuna.vacunaID}">
+                                    </f:selectItems>
+                                    <f:validateLongRange minimum="1" maximum="99"/>
+                                </p:selectOneMenu>
+                                <p:message for="cboTipoVacuna"/>
+                                
+                                <p:outputLabel for="cboceaten" value="Lugar de atención:"/>
+                                <p:selectOneMenu id="cboceaten" 
+                                                 value="#{maestroVacunacionesView.codCeaten}"  style="width: 250px" 
+                                                 required="true"
+                                                 requiredMessage="Seleccione un centro de atencion">
+                                    <f:selectItem itemLabel="Seleccionar centro atencion" itemValue=""/>
+                                    <f:selectItems value="#{maestroVacunacionesView.ceaten}" var="ceaten" 
+                                                   itemLabel="#{ceaten.descripcionCeaten}"
+                                                   itemValue="#{ceaten.ceatenID}">
+                                    </f:selectItems>
+                                    <f:validateLongRange minimum="1" maximum="99"/>
+                                </p:selectOneMenu>
+                                
+                                
+                                <p:outputLabel value="Fecha Vacunación:"/>
+                                <p:datePicker value="#{maestroVacunacionesView.maeVacunacion.fecVacunacion}" 
+                                              locale="es"
+                                              pattern="dd/MM/yyyy" showButtonBar="true" showIcon="true" mask="true"/>
+
+                                <p:outputLabel  value="Tiene enfermedades pre-existentes.:"/>
+                                <p:selectOneRadio id="console" 
+                                                  value="#{maestroVacunacionesView.maeVacunacion.snPreexistencia}" unselectable="true">
+                                    <f:selectItem itemLabel="Si" itemValue="S"/>
+                                    <f:selectItem itemLabel="No" itemValue="N"/>
+                                </p:selectOneRadio>
+
+                            </h:panelGrid>
+
+                        </div>
+                    </div>
+
+                    <p:divider/>
+                    <h:panelGrid columns="3">
+                        <p:commandButton id="cmd2" 
+                                         action="#{maestroVacunacionesView.cmdNuevo()}" value="Nuevo" 
+                                         update=":frmmain:growl,:frmmain:panel1"
+                                         styleClass="rounded-button ui-button-info"/>
+                        <p:commandButton  id="cmd3"  action="#{maestroVacunacionesView.cmdGuardar()}" 
+                                          value="Guardar" update=":frmmain:growl,:frmmain:panel1"
+                                          styleClass="rounded-button ui-button-success"/>
+                        <p:button value="Cancelar" outcome="/index" styleClass="rounded-button ui-button-secondary"/>
+
+                    </h:panelGrid>
+
+                </h:form>
+
+
+
+
+            </h:body>
+
+        </div>
+    </ui:define>
+</ui:composition>

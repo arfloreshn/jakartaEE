@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+    <ui:define name="content">
+        <div class="card">
+            <h:form id="form">
+
+                <p:growl id="msgs" showDetail="true"/>
+
+                <h3 class="ui header">Maestro detalle</h3>
+                <p:divider/>
+
+                <div class="ui grid">
+                    <div class="four wide column">
+                        <h:panelGrid columns="1" style="margin-left: 5px">
+                            <p:outputLabel value="Cliente:" style="width:50px; "/>
+                            <h:panelGrid columns="2">
+                                <p:inputText id="txtCodCliente"
+                                               size="25"
+                                               value="#{relacionUnoAMuchosView.codCliente}" 
+                                               placeholder="Ingrese un cliente">
+                                    <p:ajax event="blur" listener="#{relacionUnoAMuchosView.validarCodigoCliente}"  update="msgs"/>
+                                </p:inputText>
+                                <p:commandButton 
+                                    action="#{relacionUnoAMuchosView.viewHelperPersonas}"
+                                    icon="pi pi-search" styleClass="rounded-button ui-button-info ui-button-flat">
+                                    <p:ajax  event="dialogReturn"  
+                                             listener="#{relacionUnoAMuchosView.cmdActualizarLabelDescripcionPersonas}" update="msgs" />
+                                </p:commandButton>
+                            </h:panelGrid>
+
+                            <p:outputLabel value="Nombre cliente.:"/>
+                            <p:inputText id="lblnomcliente" 
+                                         value="#{relacionUnoAMuchosView.var_nomCliente}" size="25" readonly="true"/>
+
+
+                            <p:outputLabel value="Producto:"/>
+                            <h:panelGrid columns="2">
+                                <p:inputText id="txtcodProducto" 
+                                               size="25"
+                                               value="#{relacionUnoAMuchosView.codProducto}" placeholder="Ingrese el producto">
+                                    <p:ajax event="blur" listener="#{relacionUnoAMuchosView.validarCodigoProducto}"  update="msgs"/>
+                                </p:inputText>
+                                <p:commandButton   
+                                    action="#{relacionUnoAMuchosView.viewHelperProductos}"
+                                    icon="pi pi-search" 
+                                    styleClass="rounded-button ui-button-info ui-button-flat">
+                                    <p:ajax  event="dialogReturn"  listener="#{relacionUnoAMuchosView.cmdActualizarLabelDescripcionProducto}" update="msgs" />
+                                </p:commandButton>
+                            </h:panelGrid>
+
+                            <p:outputLabel value="Descripcion"/>
+                            <p:inputText id="lbldescripcion" value="#{relacionUnoAMuchosView.var_descripcion}" size="25" readonly="true"/>
+
+                            <p:outputLabel value="Cantidad"/>
+                            <p:inputNumber id="txtcantidad"  size="25"
+                                           value="#{relacionUnoAMuchosView.cantidad}" decimalSeparator="." decimalPlaces="2"/>   
+
+                            <p:commandButton id="cmdadd" value="Agregar producto" 
+                                             style="width: 85%; margin-top: 5px"
+                                             action="#{relacionUnoAMuchosView.cmdCrearNuevaFila}"
+                                             styleClass="rounded-button ui-button-info"
+                                             update=":form:filas, :form:txtcantidad, form:txtsubtotal,form:txtimpuesto,form:txttotal">
+                                <p:collector value="#{relacionUnoAMuchosView.det}"  
+                                             addTo="#{relacionUnoAMuchosView.itemsFactura}"  unique="false"/>
+                            </p:commandButton>
+
+                            <p:commandButton id="cmdimpiar" 
+                                             value="Limpiar"
+                                             style="width: 85%; margin-top: 5px"
+                                             styleClass="rounded-button ui-button-warning" 
+                                             type="reset" />
+
+                            <p:commandButton id="cmdfactura" value="Facturar"
+                                             style="width: 85%; margin-top: 5px"
+                                             action="#{relacionUnoAMuchosView.cmdProcesarFactura}"
+                                             styleClass="rounded-button ui-button-success"
+                                             update=":form, :form:filas,:form:msgs, form:txtsubtotal,form:txtimpuesto,form:txttotal"
+                                             />
+
+
+
+                        </h:panelGrid>   
+
+
+
+
+                    </div> <!-- FINAL DE LA COLUMNA 1 -->
+
+                    <div class="twelve wide column">
+                        <!-- PANEL DE GRILLA O FILAS -->
+                        <p:outputPanel id="filas">
+                            <p:dataTable value="#{relacionUnoAMuchosView.itemsFactura}"
+                                         var="items" 
+                                         id="grilla"
+                                         size="small"
+                                         style=" width: 100%"
+                                         rowIndexVar="indexRow" >
+                                <p:column headerText="No" width="3%" style="text-align: center">
+                                     #{indexRow+1}
+                                </p:column>
+
+                                <p:column headerText="Producto" style="width:35%">
+                                    <h:outputText value="#{items.catProductos.descripProducto}"/>
+                                </p:column>
+
+                                <p:column headerText="Cantidad" style=" width: 10%;text-align: center">
+                                    <h:outputText value="#{items.cantidad}"/>
+                                </p:column>
+
+                                <p:column headerText="Precio Vta" style="width:15%;text-align:  right">
+                                    <h:outputText value="#{items.catProductos.costoVta}"/>
+                                </p:column>
+
+                                <p:column headerText="Subtotal" style="width:15%;text-align:  right">
+                                    <h:outputText value="#{items.subtotal}">
+                                        <f:convertNumber 
+                                            type="number"
+                                            maxIntegerDigits="18"
+                                            currencySymbol="L."
+                                            maxFractionDigits="2"
+                                            pattern="###,###.00"/>
+                                    </h:outputText>
+                                </p:column>
+                                <p:column headerText="Acci&oacute;n"  style="with:15%;text-align: center">
+
+                                    <p:commandButton  icon="pi pi-times" styleClass="rounded-button ui-button-danger"
+                                                      actionListener="#{relacionUnoAMuchosView.cmdQuitarFila}"
+                                                      update=":form:grilla, :form:txtcantidad"
+                                                      style="border-color:#FF0000">   
+                                        <f:setPropertyActionListener value="#{indexRow}" 
+                                                                     target="#{relacionUnoAMuchosView.rowIndex}"/>
+                                    </p:commandButton>
+                                </p:column>
+
+                            </p:dataTable>
+                        </p:outputPanel>
+
+                    </div>
+                </div>
+
+
+
+                <!-- -AREA DE TOTALES -->
+
+                <div class="ui bottom fixed menu">
+                    <div style="margin-top: 5px;margin-left:40%"> </div>
+                    <div class="ui right aligned grid">
+                        <h:panelGrid columns="7"  style="margin-left: 20%">
+                            <p:outputLabel  for="txtsubtotal" value="Subtotal.: " />
+                            <p:inputNumber id="txtsubtotal" value="#{relacionUnoAMuchosView.subtotal}" 
+                                           style="margin-left: 3px"
+                                           readonly="true">
+                                <f:validateDoubleRange minimum="1"/>
+                            </p:inputNumber>
+                            <p:message for="txtsubtotal"/>
+
+                            <p:outputLabel  value="Impuesto.: "/>
+                            <p:inputNumber id="txtimpuesto" value="#{relacionUnoAMuchosView.impuesto}"  style="margin-left: 3px" readonly="true"/>
+
+                            <p:outputLabel  value="Total.: " style="margin-left: 5px"/>
+                            <p:inputNumber id="txttotal" value="#{relacionUnoAMuchosView.gran_total}"   style="margin-left: 3px" readonly="true"/>
+
+                        </h:panelGrid>                   
+
+                    </div>
+
+                    <br/>
+
+                </div>
+
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>
+
+

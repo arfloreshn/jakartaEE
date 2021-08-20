@@ -1,0 +1,45 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                template="../../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+    <ui:define name="content">
+        <h:head>
+            <title>Enviar Parametros con metodo GET</title>
+            <meta>
+                <f:viewParam name="id" value="#{enviarParametrosPorGet.id}"/>
+                <f:viewParam name="descripcion" value="#{enviarParametrosPorGet.descripcion}"/>
+                <f:viewParam name="mensaje" value="#{enviarParametrosPorGet.mensaje}"/>
+
+            </meta>
+
+        </h:head>
+        <h:body>
+            <h2 style="text-align:  center">Enviando parametros con metodo GET</h2>
+            <h:form id="frminput">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="N&uacute;mero Celular.:"/>
+                <p:inputText value="#{enviarParametrosPorGet.id}"/>
+                <p:outputLabel value="Nombre del Beneficiario.:"/>
+                <p:inputText value="#{enviarParametrosPorGet.descripcion}"/>
+                <p:outputLabel value="Importe acreditado.:"/>
+                <p:inputText value="#{enviarParametrosPorGet.mensaje}"/>
+                    
+                </h:panelGrid>
+                
+                <p:commandButton value="Enviar Parametros..."  type="submit"
+                                 action="#{enviarParametrosPorGet.accionEnviarParametros}">
+                    <f:param name="dni" value="#{enviarParametrosPorGet.id}"  />
+                    <f:param name="descripcion" value="#{enviarParametrosPorGet.descripcion}"  />
+                    <f:param name="mensaje"  value="#{enviarParametrosPorGet.mensaje}" />
+                </p:commandButton>
+
+            </h:form>
+
+        </h:body>        
+    </ui:define>
+    </ui:composition>
+

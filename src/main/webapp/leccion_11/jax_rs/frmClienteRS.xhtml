@@ -1,0 +1,229 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+
+    <ui:define name="content">
+
+            <h:head>
+                <title>Clientex JAX-RS</title>
+            </h:head>
+            <h:body>
+                <h:form id="frmmain">
+                    <p:growl id="growl" showDetail="true"/>
+
+                    <p:panel id="contenedor" header="Consumiendo Endpoint con JAX-RS" style="display:block">
+
+                        <p:toolbar>
+
+                            <p:toolbarGroup align="right">
+                                <!-- *-*-*-*-*-* CREAR REGISTRO *-*-*-*-*-*-*-* -->
+                                <p:commandButton    
+                                                  title="Nuevo" 
+                                                  value="Nuevo"
+                                                  styleClass="rounded-button ui-button-success"
+                                                  action="#{consumirRestFullEndPoint.instanciar}"
+                                                  oncomplete="PF('dlgNuevo').show()" >
+                                </p:commandButton>
+
+
+                            </p:toolbarGroup>
+
+                        </p:toolbar>
+
+
+                        <p:dataTable id="tbPaises" var="obj" 
+                                     value="#{consumirRestFullEndPoint.listarPaises}" 
+                                     paginator="true" 
+                                     rows = "5" 
+                                     rowsPerPageTemplate="5,10,15,20,25,30,40,50"
+                                     style="width: 100%; font-size: 14px;"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}">
+                            <p:column sortBy="#{obj.paisId}" style="width: 5%">
+                                <f:facet name="header">
+                                    Id
+                                </f:facet>
+                                <h:outputText value="#{obj.paisId}"> </h:outputText> 
+                            </p:column>
+                            <p:column sortBy="#{obj.descripPais}">
+                                <f:facet name="header">
+                                    Pais
+                                </f:facet>
+                                <h:outputText value="#{obj.descripPais}"> </h:outputText> 
+                            </p:column>
+
+                            <p:column headerText="Escoja su opcion" style="width: 15%">
+
+                                <!-- *-*-*-*-*-* ACTUALIZAR EDITAR *-*-*-*-*-*-*-* -->
+
+                                <p:commandButton id="btnUpdate" 
+                                                 icon="pi pi-pencil" 
+                                                 title="Editar"
+                                                 styleClass="rounded-button ui-button-info"
+                                                 update=":frmEditar"
+                                                 oncomplete="PF('dlgModifica').show()" >
+                                    <f:setPropertyActionListener value="#{obj}" 
+                                                                 target="#{consumirRestFullEndPoint.pais}"/> 
+                                </p:commandButton>
+
+                                <!-- *-*-*-*-*-* ELIMINAR REGISTRO  *-*-*-*-*-*-*-*-*-* -->
+                                <p:commandButton id="btnEliminar"
+                                                 icon="pi pi-times"
+                                                 style="margin-left: 2px"
+                                                 title="Borrar"
+                                                 update=":frmEliminar" 
+                                                 styleClass="rounded-button ui-button-danger"
+                                                 oncomplete="PF('dlgEliminar').show()" >
+                                    <f:setPropertyActionListener value="#{obj}" 
+                                                                 target="#{consumirRestFullEndPoint.pais}"/>
+
+                                </p:commandButton>
+
+                            </p:column>
+
+
+                        </p:dataTable> 
+
+                    </p:panel>
+
+                </h:form>
+
+                <h:form id="frmnuevo">
+                    <p:dialog id="dlgNuevo" 
+                              header="Nuevo  Registro" 
+                              widgetVar="dlgNuevo" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false">
+
+                        <h:panelGrid columns="2" style="margin:0 auto;">
+
+                            <h:outputText value="Id:" />
+                            <p:inputText value="#{consumirRestFullEndPoint.pais.paisId}" readonly="true" />
+
+                            <h:outputText value="Descripcion:" />
+                            <p:inputText value="#{consumirRestFullEndPoint.pais.descripPais}" />
+
+                            <f:facet name="footer">
+
+                                <h:inputHidden value="#{consumirRestFullEndPoint.pais.paisId}"/>
+
+                                <p:commandButton id="btnNuevoAceptar" 
+                                                 value="Guardar"
+                                                 action="#{consumirRestFullEndPoint.cmd_crear_registro}"
+                                                 style="width: 40%"
+                                                 oncomplete="PF('dlgNuevo').hide()"  
+                                                 update=":frmmain:contenedor , :frmmain:growl"
+                                                 icon="pi pi-check-circle" title="Guardar"/>
+
+                                <p:commandButton id="btnNuevoCancelar" 
+                                                 value="Cancelar"
+                                                 style="width: 40%; margin-left: 2px"
+                                                 update=":frmmain"
+                                                 oncomplete="PF('dlgNuevo').hide()" icon="fa fa-home">
+                                </p:commandButton>
+
+                            </f:facet>
+
+                        </h:panelGrid>
+
+                    </p:dialog> 
+                </h:form>
+
+                <!-- *-*-*-*-*-* FORMULARIO PARA MODIFICAR UN REGISTRO *-*-*-*-*-*-*-*-*-* -->
+
+                <h:form id="frmEditar">
+
+                    <p:dialog id="dlgEdita" 
+                              header="Actualizar Registro" 
+                              widgetVar="dlgModifica" modal="true" 
+                              showEffect="fade" hideEffect="fade" resizable="false">
+
+                        <h:panelGrid columns="2" style="margin:0 auto;">
+
+                            <h:outputText value="Id:" />
+                            <p:inputText value="#{consumirRestFullEndPoint.pais.paisId}" readonly="true" />
+
+                            <h:outputText value="Descripcion:" />
+                            <p:inputText value="#{consumirRestFullEndPoint.pais.descripPais}" />
+
+                            <f:facet name="footer">
+
+                                <h:inputHidden value="#{consumirRestFullEndPoint.pais.paisId}"/>
+
+                                <p:commandButton id="btnUpdateAceptar" 
+                                                 value="Guardar"
+                                                 actionListener="#{consumirRestFullEndPoint.cmd_actualizar_registro}"
+                                                 style="width: 40%"
+                                                 update=":frmmain:contenedor , :frmmain:growl"
+                                                 oncomplete="PF('dlgModifica').hide()"  
+                                                 icon="pi pi-check-circle" title="Guardar"/>
+
+                                <p:commandButton id="btnUpdateCancelar" 
+                                                 value="Cancelar"
+                                                 style="width: 40%; margin-left: 2px"
+                                                 update=":frmmain"
+                                                 oncomplete="PF('dlgModifica').hide()" icon="fa fa-home">
+                                </p:commandButton>
+
+                            </f:facet>
+
+                        </h:panelGrid>
+                    </p:dialog>
+
+                </h:form>
+
+                <h:form id="frmEliminar">
+
+                    <p:dialog id="dlgEliminar" 
+                              header="Eliminar Registro" 
+                              widgetVar="dlgEliminar" 
+                              modal="true" 
+                              showEffect="fade" 
+                              hideEffect="fade" 
+                              resizable="false">
+
+                        <h:panelGrid columns="2" style="margin:0 auto;">
+
+                            <h:outputText value="Id:" />
+                            <p:inputText value="#{consumirRestFullEndPoint.pais.paisId}" readonly="true" />
+
+                            <h:outputText value="Descripcion:" />
+                            <p:inputText value="#{consumirRestFullEndPoint.pais.descripPais}" readonly="true" />
+
+                            <f:facet name="footer">
+
+                                <h:inputHidden value="#{consumirRestFullEndPoint.pais.paisId}"/>
+
+                                <p:commandButton id="btnEliminaAceptar" 
+                                                 value="Confirmar" 
+                                                 action="#{consumirRestFullEndPoint.cmd_borrar_registro}"
+                                                 update=":frmmain:contenedor , :frmmain:growl"
+                                                 style="width: 40%;"
+                                                 oncomplete="PF('dlgEliminar').hide()"  
+                                                 icon="fa fa-check-circle" title="Guardar"/>
+
+                                <p:commandButton id="btnEliminaCancelar" 
+                                                 value="Cancelar" 
+                                                 update=":frmmain"
+                                                 style="width: 40%; margin-left: 2px"
+                                                 icon="fa fa-home"
+                                                 oncomplete="PF('dlgEliminar').hide()">
+                                </p:commandButton>
+
+                            </f:facet>
+
+                        </h:panelGrid>
+                    </p:dialog>
+
+                </h:form>
+
+            </h:body>
+        </ui:define>
+
+
+</ui:composition>
+

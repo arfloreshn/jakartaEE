@@ -1,0 +1,80 @@
+* {margin:0px; padding:0px; border:0px;}
+
+#top {
+    z-index:  1;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: #000000;
+    color: white;
+}
+
+
+#left {
+    float:  left;
+    margin-top: 50px;
+    width: 19%;
+    height: 50%;
+}
+
+.left_content{
+    float: left;
+    margin-top: 45px;
+    padding-left: 10px;
+    width: 80%;
+
+}
+
+
+
+.barraSuperior{
+    float:  top;
+    padding-top: 15px;
+    background-color:  #000000;  
+    text-align: center;
+    color:  #ffffff;
+    font-size:  45px;
+    height: 50px;
+}
+
+.letrapiepagina{
+    font-family:   Gill Sans, sans-serif;
+    font-size: 42px;
+    background-color:  #000000;
+    color:  #ffffff;
+    text-align: center;
+}
+
+body .ui-breadcrumb {
+    background: #ffffff;
+    border:  none; 
+    padding: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+    table {
+        width:100%;
+    }
+    thead {
+        display: none;
+    }
+    tr:nth-of-type(2n) {
+        background-color: inherit;
+    }
+    tr td:first-child {
+        background: #f0f0f0;
+        font-weight:bold;
+        font-size:1.3em;
+    }
+    tbody td {
+        display: block;
+        text-align:center;
+    }
+    tbody td:before {
+        content: attr(data-th);
+        display: block;
+        text-align:center;
+    }
+
+
+}

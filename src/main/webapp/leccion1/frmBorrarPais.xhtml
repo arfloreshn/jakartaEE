@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+    <ui:define name="content">
+        <h:head>
+            <title>Eliminar Pais</title>
+        </h:head>
+
+        <h:body>
+
+            <h2  style="text-align:  center">Borrando registros con JPA y Primefaces </h2>
+            <h:form style="margin-top: 5px">
+                <h:panelGrid columns="5">
+                    <label for="codigoPais">Codigo Pais</label>
+                    <p:inputText id="codigoPais" type="text" value="#{PaisView.var_codigoPais}" />
+                    <p:commandButton value="Buscar" 
+                                     action="#{PaisView.cmdBuscarPaisPorCodigo}"
+                                     update=":frmResultado,cmdborrar"
+                                     styleClass="rounded-button ui-button-success"/>
+                    <p:commandButton id="cmdborrar" value="Borrar" 
+                                     action="#{PaisView.cmdBorrarRegistro}"
+                                     disabled="#{paisView.snBloquearCmdEditar}" update="frmResultado"
+                                     styleClass="rounded-button">
+                    <p:confirm type="popup" header="Confirmacion" message="Desea confirmar el proceso de elimar este registro?" icon="pi pi-info-circle"/>
+                    </p:commandButton>
+                    <p:button value="Cancelar" outcome="/index" styleClass="rounded-button ui-button-secondary"/>
+
+
+                </h:panelGrid>
+
+                <p:confirmPopup global="true">
+                    <p:commandButton value="No" type="button" styleClass="ui-confirm-popup-no ui-button-flat"/>
+                    <p:commandButton value="Si" type="button" styleClass="ui-confirm-popup-yes" />
+                </p:confirmPopup>
+
+            </h:form>
+
+            <h:form id="frmResultado">
+
+                <div class="p-field ui-fluid">
+                    <label for="lblpais">Resultado</label>
+                    <p:inputText id="lblpais" type="text" value="#{PaisView.var_pais.descripPais}" readonly="true" />
+                </div>
+
+            </h:form>
+
+        </h:body>
+
+    </ui:define>
+</ui:composition>

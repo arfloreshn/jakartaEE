@@ -1,0 +1,634 @@
+USE [dbLeccion2]
+GO
+/****** Object:  Table [dbo].[cat_productos]    Script Date: 12/8/2021 17:49:32 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[cat_productos]') AND type in (N'U'))
+DROP TABLE [dbo].[cat_productos]
+GO
+CREATE TABLE [dbo].[cat_productos](
+	[producto_id] [int] IDENTITY(1,1) NOT NULL,
+	[cod_barra] [varchar](20) NOT NULL,
+	[descrip_producto] [varchar](50) NOT NULL,
+	[costo_uni] [decimal](18, 2) NOT NULL,
+	[costo_vta] [decimal](18, 2) NOT NULL,
+	[nombreFoto] [varchar](20) NULL,
+	[fotografia] [image] NULL,
+ CONSTRAINT [PK_cat_producto] PRIMARY KEY CLUSTERED 
+([producto_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[cat_ceaten]    Script Date: 12/8/2021 18:06:22 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[cat_ceaten]') AND type in (N'U'))
+DROP TABLE [dbo].[cat_ceaten]
+GO
+CREATE TABLE [dbo].[cat_ceaten](
+	[ceatenID] [int] IDENTITY(1,1) NOT NULL,
+	[descripcion_ceaten] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_cat_ceaten2] PRIMARY KEY CLUSTERED 
+(
+	[ceatenID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[cat_menu]    Script Date: 12/8/2021 18:07:21 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[cat_menu]') AND type in (N'U'))
+DROP TABLE [dbo].[cat_menu]
+GO
+CREATE TABLE [dbo].[cat_menu](
+	[item_id] [int] IDENTITY(1,1) NOT NULL,
+	[item_id_padre] [int] NOT NULL,
+	[app_id] [int] NOT NULL,
+	[tipo_nodo] [char](1) NOT NULL,
+	[descripcion] [varchar](50) NOT NULL,
+	[ruta] [varchar](180) NOT NULL,
+ CONSTRAINT [PK_cat_menu] PRIMARY KEY CLUSTERED 
+(
+	[item_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[cat_pais]    Script Date: 12/8/2021 18:08:08 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[cat_pais]') AND type in (N'U'))
+DROP TABLE [dbo].[cat_pais]
+GO
+CREATE TABLE [dbo].[cat_pais](
+	[pais_id] [int] IDENTITY(1,1) NOT NULL,
+	[descrip_pais] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_cat_paises] PRIMARY KEY CLUSTERED 
+(
+	[pais_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[cat_vacunas]    Script Date: 12/8/2021 17:50:37 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[cat_vacunas]') AND type in (N'U'))
+DROP TABLE [dbo].[cat_vacunas]
+GO
+CREATE TABLE [dbo].[cat_vacunas](
+	[vacunaID] [int] IDENTITY(1,1) NOT NULL,
+	[descripcion_vacuna] [varchar](50) NULL,
+ CONSTRAINT [PK_cat_vacunas] PRIMARY KEY CLUSTERED 
+(
+	[vacunaID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[personas_mae]    Script Date: 12/8/2021 17:55:44 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[personas_mae]') AND type in (N'U'))
+DROP TABLE [dbo].[personas_mae]
+GO
+CREATE TABLE [dbo].[personas_mae](
+	[persona_id] [int] IDENTITY(1,1) NOT NULL,
+	[nombres] [varchar](50) NOT NULL,
+	[primer_apellido] [varchar](50) NOT NULL,
+	[segundo_apellido] [varchar](50) NOT NULL,
+	[sexo] [char](1) NOT NULL,
+	[estado_civil] [char](1) NOT NULL,
+	[fec_nacimiento] [datetime] NOT NULL,
+	[tipo_documento] [int] NOT NULL,
+	[nro_documento] [varchar](50) NOT NULL,
+	[fec_alta] [datetime] NULL,
+	[fec_baja] [datetime] NULL,
+	[fotografia] [image] NULL,
+ CONSTRAINT [PK_mae_personas_1] PRIMARY KEY CLUSTERED 
+(
+	[persona_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[factura_mae] DROP CONSTRAINT [FK_personas_mae]
+GO
+/****** Object:  Table [dbo].[factura_mae]    Script Date: 12/8/2021 17:53:16 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[factura_mae]') AND type in (N'U'))
+DROP TABLE [dbo].[factura_mae]
+GO
+CREATE TABLE [dbo].[factura_mae](
+	[factura_id] [int] IDENTITY(1,1) NOT NULL,
+	[fec_registro] [datetime] NOT NULL,
+	[persona_id] [int] NOT NULL,
+	[nom_cliente] [varchar](100) NOT NULL,
+	[subtotal] [decimal](18, 2) NOT NULL,
+	[impuesto] [decimal](18, 2) NOT NULL,
+	[total] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_factura_mae] PRIMARY KEY CLUSTERED 
+(
+	[factura_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[factura_mae]  WITH CHECK ADD  CONSTRAINT [FK_personas_mae] FOREIGN KEY([persona_id])
+REFERENCES [dbo].[personas_mae] ([persona_id])
+GO
+ALTER TABLE [dbo].[factura_mae] CHECK CONSTRAINT [FK_personas_mae]
+GO
+ALTER TABLE [dbo].[factura_det] DROP CONSTRAINT [FK_factura_det]
+GO
+ALTER TABLE [dbo].[factura_det] DROP CONSTRAINT [FK_cat_productos]
+GO
+/****** Object:  Table [dbo].[factura_det]    Script Date: 12/8/2021 17:52:01 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[factura_det]') AND type in (N'U'))
+DROP TABLE [dbo].[factura_det]
+GO
+CREATE TABLE [dbo].[factura_det](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[factura_id] [int] NOT NULL,
+	[producto_id] [int] NOT NULL,
+	[cod_barra] [varchar](20) NOT NULL,
+	[cantidad] [decimal] (18, 2) NOT NULL,
+	[preciovta] [decimal] (18, 2) NOT NULL,
+	[subtotal] [decimal] (18, 2) NOT NULL,
+	[rowIndex] [int] NULL,
+ CONSTRAINT [PK_factura_det] PRIMARY KEY CLUSTERED 
+(	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[factura_det]  WITH CHECK ADD  CONSTRAINT [FK_cat_productos] FOREIGN KEY([producto_id])
+REFERENCES [dbo].[cat_productos] ([producto_id])
+GO
+
+ALTER TABLE [dbo].[factura_det] CHECK CONSTRAINT [FK_cat_productos]
+GO
+
+ALTER TABLE [dbo].[factura_det]  WITH CHECK ADD  CONSTRAINT [FK_factura_det] FOREIGN KEY([factura_id])
+REFERENCES [dbo].[factura_mae] ([factura_id])
+GO
+
+ALTER TABLE [dbo].[factura_det] CHECK CONSTRAINT [FK_factura_det]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[dbo].[fn_sumar]'))
+DROP function [dbo].[fn_sumar]
+GO
+-- Volcando estructura para función dbLecciones.fn_sumar
+CREATE function [dbo].[fn_sumar](@x decimal(12,2), @y decimal(12,2))
+returns decimal(12,2)
+as 
+begin
+ return  @x + @y
+end
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[dbo].[get_menu]'))
+DROP procedure [dbo].[get_menu]
+GO
+-- Volcando estructura para procedimiento dbLecciones.get_menu
+CREATE procedure [dbo].[get_menu]
+AS
+BEGIN
+        SELECT item_id,
+		item_id_padre,
+		app_id,
+		tipo_nodo,
+		descripcion,
+		ruta
+         FROM cat_menu
+        WHERE tipo_nodo='T' and item_id_padre=0; 
+  END
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[dbo].[get_submenu]'))
+DROP procedure [dbo].[get_submenu]
+GO
+-- Volcando estructura para procedimiento dbLecciones.get_submenu
+CREATE procedure [dbo].[get_submenu](@app_id int)
+  as
+  begin
+   select item_id, item_id_padre, app_id, tipo_nodo,descripcion, ruta 
+ from cat_menu where app_id=@app_id
+ and tipo_nodo='T' and item_id_padre !=0
+  end
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[dbo].[get_submenu_items]'))
+DROP procedure [dbo].[get_submenu_items]
+GO
+-- Volcando estructura para procedimiento dbLecciones.get_submenu_items
+CREATE procedure [dbo].[get_submenu_items](@app_id int, @item_id int)
+  as
+  begin
+ select item_id, item_id_padre, app_id,tipo_nodo,descripcion, ruta 
+ from cat_menu where app_id=@app_id
+ and tipo_nodo='F' and item_id_padre=@item_id
+  end
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[dbo].[sp_personas_contarPorRangoFechas]'))
+DROP procedure [dbo].[sp_personas_contarPorRangoFechas]
+GO
+-- Volcando estructura para procedimiento dbLecciones.sp_personas_contarPorRangoFechas
+CREATE procedure [dbo].[sp_personas_contarPorRangoFechas](@fec_desde datetime, @fec_hasta datetime, @sumar decimal(12,2) OUTPUT)
+as
+begin
+  select @sumar = count(a.persona_id) from personas_mae a where a.fec_nacimiento between @fec_desde and @fec_hasta
+  return @sumar
+end
+GO
+DELETE FROM [dbo].[cat_menu]
+GO
+SET IDENTITY_INSERT  [dbo].[cat_menu] ON
+GO
+INSERT INTO [dbo].[cat_menu] (item_id, item_id_padre, app_id, tipo_nodo, descripcion, ruta) VALUES
+	(1, 0, 1, 'T', 'Ventas', ''),
+	(2, 1, 1, 'T', 'Facturación', ''),
+	(3, 2, 1, 'F', 'Facturar', '/formularios/ventas/facturacion/frmVentasFacturacion'),
+	(4, 2, 1, 'F', 'Cambios', '/formularios/ventas/facturacion/frmVentasCambios'),
+	(5, 2, 1, 'F', 'Anulación', '/formularios/ventas/facturacion/frmVentasAnulacion'),
+	(6, 1, 1, 'T', 'Reportes', ''),
+	(7, 6, 1, 'F', 'Ventas diarias', '/formularios/ventas/reportes/frmRepVentasDiarias'),
+	(8, 6, 1, 'F', 'Ventas por promotor', '/formularios/ventas/reportes/frmRepVentasPromotor'),
+	(9, 6, 1, 'F', 'Ventas por sucursal', '/formularios/ventas/reportes/frmRepVentasSucursal'),
+	(10, 0, 2, 'T', 'Inventario de almacen', ''),
+	(11, 10, 2, 'T', 'Consultar existencias', ''),
+	(12, 11, 2, 'F', 'Existencia por producto', '/index'),
+	(13, 11, 2, 'F', 'Existencia por sucursal', '/index'),
+	(14, 10, 2, 'T', 'Entradas de almacen', ''),
+	(15, 14, 2, 'F', 'Compra de productos', '/index'),
+	(16, 14, 2, 'F', 'Requisicíones internas', '/index'),
+	(17, 10, 2, 'T', 'Salidas de almacen', ''),
+	(18, 17, 2, 'F', 'Transferencia a sucursal', '/index'),
+	(19, 17, 2, 'F', 'Devolución de compra', '/index'),
+	(20, 17, 2, 'F', 'Anulación de entrada', '/index'),
+	(21, 10, 2, 'T', 'Reportes', ''),
+	(22, 21, 2, 'F', 'Consultar existencias', '/index'),
+	(23, 21, 2, 'F', 'Reporte de compras', '/index'),
+	(24, 21, 2, 'F', 'Reporte de requisiciones', '/index'),
+	(25, 21, 2, 'F', 'Reporte de anulaciones', '/index'),
+	(26, 0, 3, 'T', 'Cuentas por cobrar', ''),
+	(27, 26, 3, 'T', 'Clientes', ''),
+	(28, 27, 3, 'F', 'Crear cliente', '/index'),
+	(29, 27, 3, 'F', 'Estado de cuenta', '/index'),
+	(30, 27, 3, 'F', 'Registrar nota de debito', '/index'),
+	(31, 27, 3, 'F', 'Registrar nota de credito', '/index'),
+	(32, 26, 3, 'T', 'Reportes', ''),
+	(33, 32, 3, 'F', 'Saldo de clientes', '/index'),
+	(34, 32, 3, 'F', 'Estado de cuenta', '/index'),
+	(35, 32, 3, 'F', 'Cartas de vencimiento', '/index'),
+	(36, 0, 4, 'T', 'Cuentas por pagar', ''),
+	(37, 36, 4, 'T', 'Proveedores', ''),
+	(38, 37, 4, 'F', 'Crear proveedor', '/index'),
+	(39, 37, 4, 'F', 'Estado de cuenta', '/index'),
+	(40, 37, 4, 'F', 'Registrar nota de debito', '/index'),
+	(41, 37, 4, 'F', 'Registrar nota de credito', '/index'),
+	(42, 36, 4, 'T', 'Reportes', ''),
+	(43, 42, 4, 'F', 'Saldo de proveedores', '/index'),
+	(44, 42, 4, 'F', 'Detalle de saldos pendientes', '/index'),
+	(45, 0, 5, 'T', 'Finanzas', ''),
+	(46, 45, 5, 'T', 'Diario', ''),
+	(47, 46, 5, 'F', 'Crear asiento diario', '/index'),
+	(48, 46, 5, 'F', 'Registrar factor de cambio', '/index'),
+	(49, 45, 5, 'T', 'Cierre', ''),
+	(50, 49, 5, 'F', 'Cierre mensual', '/index'),
+	(51, 49, 5, 'F', 'Cierre anual', '/index'),
+	(52, 49, 5, 'F', 'Cierre Fiscal', '/index'),
+	(53, 45, 5, 'T', 'Balances personalizados', ''),
+	(54, 53, 5, 'F', 'Crear balance', '/index'),
+	(55, 45, 5, 'T', 'Catalogo contable', ''),
+	(56, 55, 5, 'F', 'Crear catalogo contable', '/index'),
+	(57, 45, 5, 'T', 'Reportes financieros', ''),
+	(58, 57, 5, 'T', 'Diarios', ''),
+	(59, 58, 5, 'F', 'Reporte de asientos', '/index'),
+	(60, 58, 5, 'F', 'Reporte de mayores', '/index'),
+	(61, 58, 5, 'F', 'Reporte de Impuesto', '/index'),
+	(62, 57, 5, 'T', 'Balances', ''),
+	(63, 62, 5, 'F', 'Balance de comprobación', '/index'),
+	(64, 62, 5, 'F', 'Balance de general financiero', '/index'),
+	(65, 62, 5, 'F', 'Balance de perdidas y ganancias', '/index'),
+	(66, 0, 6, 'T', 'Administración', ''),
+	(67, 66, 6, 'T', 'Chequera', ''),
+	(68, 67, 6, 'F', 'Pagos en linea', '/index'),
+	(69, 67, 6, 'F', 'Generar cheque de pago', '/index'),
+	(70, 67, 6, 'F', 'Conciliación cheques', '/index'),
+	(71, 66, 6, 'T', 'Reportes', ''),
+	(72, 71, 6, 'F', 'Saldos de cuentas bancarias', '/index'),
+	(73, 66, 6, 'T', 'Saldos generales', ''),
+	(74, 73, 6, 'F', 'Saldos de clientes', '/index'),
+	(75, 73, 6, 'F', 'Saldos de proveedores', '/index'),
+	(76, 73, 6, 'F', 'Saldos de mayores', '/index'),
+	(77, 73, 6, 'F', 'Saldos de cuentas bancarias', '/index'),
+	(78, 0, 7, 'T', 'Mantenimiento', ''),
+	(79, 78, 7, 'T', 'Tablas de ventas', ''),
+	(80, 79, 7, 'F', 'Formas de pagos', '/index'),
+	(81, 79, 7, 'F', 'Crear promotor', '/index'),
+	(82, 79, 7, 'F', 'Crear zona de venta', '/index'),
+	(83, 79, 7, 'F', 'Crear porcentaje de descuento', '/index'),
+	(84, 79, 7, 'F', 'Crear porcentaje de ganancia', '/index'),
+	(85, 78, 7, 'T', 'Tablas de inventario', ''),
+	(86, 85, 7, 'F', 'Crear bodega', '/index'),
+	(87, 85, 7, 'F', 'Crear categoria', '/index'),
+	(88, 85, 7, 'F', 'Crear marca', '/index'),
+	(89, 85, 7, 'F', 'Crear producto', '/index'),
+	(90, 78, 7, 'T', 'Tablas de Finanzas', ''),
+	(91, 90, 7, 'F', 'Crear sucursal', '/index'),
+	(92, 90, 7, 'F', 'Crear periodo contable', '/index'),
+	(93, 90, 7, 'F', 'Crear monedas', '/index'),
+	(94, 90, 7, 'F', 'Crear impuestos', '/index'),
+	(95, 90, 7, 'F', 'Crear documentos financieros', '/index'),
+	(96, 90, 7, 'F', 'Crear partida recurrente', '/index'),
+	(97, 90, 7, 'F', 'Crear centro de costo', '/index'),
+	(98, 0, 8, 'T', 'Seguridad', ''),
+	(99, 98, 8, 'T', 'Usuarios', ''),
+	(100, 99, 8, 'F', 'Crear usuario', '/index'),
+	(101, 99, 8, 'F', 'Asignar modulos', '/index'),
+	(102, 99, 8, 'F', 'Asignar rol', '/index'),
+	(103, 99, 8, 'F', 'Asignar permisos', '/index'),
+	(104, 98, 8, 'T', 'Perfiles', ''),
+	(105, 104, 8, 'F', 'Copiar perfil', '/index'),
+	(106, 0, 9, 'T', 'Configuración', ''),
+	(107, 106, 9, 'F', 'Empresa', '/index'),
+	(108, 106, 9, 'F', 'Impuestos', '/index'),
+	(109, 106, 9, 'F', 'Periodo fiscal', '/index'),
+	(110, 106, 9, 'F', 'Correlativos de facturación', '/index');
+GO
+GO
+SET IDENTITY_INSERT  [dbo].[cat_menu] OFF;
+GO
+-- Volcando datos para la tabla dbLecciones.cat_pais: 247 rows
+DELETE FROM [dbo].[cat_pais];
+GO
+INSERT INTO [dbo].[cat_pais] (descrip_pais) VALUES
+	('HONDURAS'),
+	('EL SALVADOR'),
+	('GUATEMALA'),
+	('BELICE'),
+	('AFGANISTAN'),
+	('ALBANIA'),
+	('ALEMANIA'),
+	('ANDORRA'),
+	('ANGOLA'),
+	('ANGUILLA'),
+	('ANTIGUA Y BARBUDA'),
+	('ANTILLAS HOLANDESAS'),
+	('ARABIA SAUDI'),
+	('ARGELIA'),
+	('ARGENTINA'),
+	('ARMENIA'),
+	('ARUBA'),
+	('AUSTRALIA'),
+	('AUSTRIA'),
+	('AZERBAIYAN'),
+	('BAHAMAS'),
+	('BAHREIN'),
+	('BANGLADESH'),
+	('BARBADOS'),
+	('BELARUS'),
+	('BELGICA'),
+	('BELICE'),
+	('BENIN'),
+	('BERMUDAS'),
+	('BHUTÁN'),
+	('BOLIVIA'),
+	('BOSNIA Y HERZEGOVINA'),
+	('BOTSWANA'),
+	('BRASIL'),
+	('BRUNEI'),
+	('BULGARIA'),
+	('BURKINA FASO'),
+	('BURUNDI'),
+	('CABO VERDE'),
+	('CAMBOYA'),
+	('CAMERUN'),
+	('CANADA'),
+	('CHAD'),
+	('CHILE'),
+	('CHINA'),
+	('CHIPRE'),
+	('COLOMBIA'),
+	('COMORES'),
+	('CONGO'),
+	('COREA'),
+	('COREA DEL NORTE'),
+	('COSTA DE MARFIL'),
+	('COSTA RICA'),
+	('CROACIA'),
+	('CUBA'),
+	('DINAMARCA'),
+	('DJIBOUTI'),
+	('DOMINICA'),
+	('ECUADOR'),
+	('EGIPTO'),
+	('EL SALVADOR'),
+	('EMIRATOS ARABES UNIDOS'),
+	('ERITREA'),
+	('ESLOVENIA'),
+	('ESPAÑA'),
+	('ESTADOS UNIDOS DE AMERICA'),
+	('ESTONIA'),
+	('ETIOPIA'),
+	('FIJI'),
+	('FILIPINAS'),
+	('FINLANDIA'),
+	('FRANCIA'),
+	('GABON'),
+	('GAMBIA'),
+	('GEORGIA'),
+	('GHANA'),
+	('GIBRALTAR'),
+	('GRANADA'),
+	('GRECIA'),
+	('GROENLANDIA'),
+	('GUADALUPE'),
+	('GUAM'),
+	('GUATEMALA'),
+	('GUAYANA FRANCESA'),
+	('GUERNESEY'),
+	('GUINEA'),
+	('GUINEA ECUATORIAL'),
+	('GUINEA-BISSAU'),
+	('GUYANA'),
+	('HAITI'),
+	('HONDURAS'),
+	('HONG KONG'),
+	('HUNGRIA'),
+	('INDIA'),
+	('INDONESIA'),
+	('IRAN'),
+	('IRAQ'),
+	('IRLANDA'),
+	('ISLA DE MAN'),
+	('ISLA NORFOLK'),
+	('ISLANDIA'),
+	('ISLAS ALAND'),
+	('ISLAS CAIMÁN'),
+	('ISLAS COOK'),
+	('ISLAS DEL CANAL'),
+	('ISLAS FEROE'),
+	('ISLAS MALVINAS'),
+	('ISLAS MARIANAS DEL NORTE'),
+	('ISLAS MARSHALL'),
+	('ISLAS PITCAIRN'),
+	('ISLAS SALOMON'),
+	('ISLAS TURCAS Y CAICOS'),
+	('ISLAS VIRGENES BRITANICAS'),
+	('ISLAS VÍRGENES DE LOS ESTADOS UNIDOS'),
+	('ISRAEL'),
+	('ITALIA'),
+	('JAMAICA'),
+	('JAPON'),
+	('JERSEY'),
+	('JORDANIA'),
+	('KAZAJSTAN'),
+	('KENIA'),
+	('KIRGUISTAN'),
+	('KIRIBATI'),
+	('KUWAIT'),
+	('LAOS'),
+	('LESOTHO'),
+	('LETONIA'),
+	('LIBANO'),
+	('LIBERIA'),
+	('LIBIA'),
+	('LIECHTENSTEIN'),
+	('LITUANIA'),
+	('LUXEMBURGO'),
+	('MACAO'),
+	('MACEDONIA'),
+	('MADAGASCAR'),
+	('MALASIA'),
+	('MALAWI'),
+	('MALDIVAS'),
+	('MALI'),
+	('MALTA'),
+	('MARRUECOS'),
+	('MARTINICA'),
+	('MAURICIO'),
+	('MAURITANIA'),
+	('MAYOTTE'),
+	('MEXICO'),
+	('MICRONESIA'),
+	('MOLDAVIA'),
+	('MONACO'),
+	('MONGOLIA'),
+	('MONTENEGRO'),
+	('MONTSERRAT'),
+	('MOZAMBIQUE'),
+	('MYANMAR'),
+	('NAMIBIA'),
+	('NAURU'),
+	('NEPAL'),
+	('NICARAGUA'),
+	('NIGER'),
+	('NIGERIA'),
+	('NIUE'),
+	('NORUEGA'),
+	('NUEVA CALEDONIA'),
+	('NUEVA ZELANDA'),
+	('OMAN'),
+	('OTROS PAISES O TERRITORIOS DE AFRICA'),
+	('OTROS PAISES O TERRITORIOS DE AMERICA DEL NORTE'),
+	('OTROS PAISES O TERRITORIOS DE ASIA'),
+	('OTROS PAISES O TERRITORIOS DE OCEANIA'),
+	('OTROS PAISES O TERRITORIOS DE SUDAMERICA'),
+	('PAISES BAJOS'),
+	('PAKISTAN'),
+	('PALAOS'),
+	('PALESTINA'),
+	('PANAMA'),
+	('PAPUA NUEVA GUINEA'),
+	('PARAGUAY'),
+	('PERU'),
+	('POLINESIA FRANCESA'),
+	('POLONIA'),
+	('PORTUGAL'),
+	('PUERTO RICO'),
+	('QATAR'),
+	('REINO UNIDO'),
+	('REP.DEMOCRATICA DEL CONGO'),
+	('REPUBLICA CENTROAFRICANA'),
+	('REPUBLICA CHECA'),
+	('REPUBLICA DOMINICANA'),
+	('REPUBLICA ESLOVACA'),
+	('REUNION'),
+	('RUANDA'),
+	('RUMANIA'),
+	('RUSIA'),
+	('SAHARA OCCIDENTAL'),
+	('SAMOA'),
+	('SAMOA AMERICANA'),
+	('SAN BARTOLOME'),
+	('SAN CRISTOBAL Y NIEVES'),
+	('SAN MARINO'),
+	('SAN MARTIN (PARTE FRANCESA)'),
+	('SAN PEDRO Y MIQUELON'),
+	('SAN VICENTE Y LAS GRANADINAS'),
+	('SANTA HELENA'),
+	('SANTA LUCIA'),
+	('SANTA SEDE'),
+	('SANTO TOME Y PRINCIPE'),
+	('SENEGAL'),
+	('SERBIA'),
+	('SEYCHELLES'),
+	('SIERRA LEONA'),
+	('SINGAPUR'),
+	('SIRIA'),
+	('SOMALIA'),
+	('SRI LANKA'),
+	('SUDAFRICA'),
+	('SUDAN'),
+	('SUECIA'),
+	('SUIZA'),
+	('SURINAM'),
+	('SVALBARD Y JAN MAYEN'),
+	('SWAZILANDIA'),
+	('TADYIKISTAN'),
+	('TAILANDIA'),
+	('TANZANIA'),
+	('TIMOR ORIENTAL'),
+	('TOGO'),
+	('TOKELAU'),
+	('TONGA'),
+	('TRINIDAD Y TOBAGO'),
+	('TUNEZ'),
+	('TURKMENISTAN'),
+	('TURQUIA'),
+	('TUVALU'),
+	('UCRANIA'),
+	('UGANDA'),
+	('URUGUAY'),
+	('UZBEKISTAN'),
+	('VANUATU'),
+	('VENEZUELA'),
+	('VIETNAM'),
+	('WALLIS Y FORTUNA'),
+	('YEMEN'),
+	('ZAMBIA'),
+	('ZIMBABWE'),
+	('esto es una prueba');
+-- Volcando datos para la tabla dbLecciones.cat_ceaten: -1 rows
+DELETE FROM [dbo].[cat_ceaten];
+GO
+INSERT INTO [dbo].[cat_ceaten] (descripcion_ceaten) VALUES
+	('Hospital Escuela'),
+	('Instituto Nacional del Torax'),
+	('Hospital Psiquiatrico Mario Mendoza'),
+	('Hospital San Felipe'),
+	('Hospital Santa Rosita'),
+	('Hospital Mario Catarino Rivas'),
+	('Hospital EscuelaHospital Gabriel Alavarado'),
+	('Hospital Dr. Roberto Suazo Cordova'),
+	('Hospital El Progreso'),
+	('Hospital Puerto Cortes'),
+	('Hospital Santa Barbara'),
+	('Hospital Manuel J. Subirana'),
+	('Hospital Anibal Murillo'),
+	('Hospital Salvador Paredes'),
+	('Hospital San Isidro'),
+	('Hospital de Roatan'),
+	('Hospital de San Marcos'),
+	('Hospital Juan Manuel Galvez'),
+	('Hospital Dr. Enrique Aguilar'),
+	('Hospital Puerto Lempira'),
+	('Hospital San Lorenzo'),
+	('Hospital Tela Integrado'),
+	('Hospital Leonardo Martinez'),
+	('Hospital Atlantida'),
+	('Hospital Reg. De Occidente'),
+	('Hospital del Sur'),
+	('Hospital San Francisco'),
+	('Hospital Santa Teresa');
+GO
+DELETE FROM [dbo].[cat_vacunas];
+GO
+INSERT INTO [dbo].[cat_vacunas](descripcion_vacuna) VALUES
+	('AstraZeneca / Oxford'),
+	('Moderna'),
+	('Jhonson & Jhonson'),
+	('Sputnik V'),
+	('Pfizer'),
+	('Sinovac');

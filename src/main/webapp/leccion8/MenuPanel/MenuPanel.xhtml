@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+    <ui:define name="content">
+
+        <h:body>
+            <p:outputPanel style="display:block">
+                <h2 style="text-align: center">Componente Panel Menu</h2>
+            </p:outputPanel>
+
+
+            <p:link outcome="eje1_Submenus" value="Ejemplo 1, Submenus Estatico">
+                <f:param name="mnu" value="MenuPanel"/>
+                <f:param name="opt" value="leccion8"/>
+                <f:param name="lbl" value="Submenu Estatico"/>
+            </p:link><br/>
+            <p:link outcome="eje2_SubmenusItems" value="Ejemplo 2, Submenus e Items Estatico">
+                <f:param name="mnu" value="MenuPanel"/>
+                <f:param name="opt" value="leccion8"/>
+                <f:param name="lbl" value=" Submenus e Items Estatico"/>
+            </p:link><br/>
+            <p:link outcome="eje3_SubmenusDinamico" value="Ejemplo 3, Submenus Dinamico con conexión a base de datos">
+                <f:param name="mnu" value="MenuPanel"/>
+                <f:param name="opt" value="leccion8"/>
+                <f:param name="lbl" value="Submenu Dinamico"/>
+            </p:link><br/>
+            <p:link outcome="eje4_SubmenusItemsDinamico" value="Ejemplo 4, Submenus e Items Dinamicos con conexión a base de datos">
+                <f:param name="mnu" value="MenuPanel"/>
+                <f:param name="opt" value="leccion8"/>
+                <f:param name="lbl" value="Submenus e Items Dinamicos"/>
+            </p:link><br/>
+            <!-- comment -->
+            <p style="font-family:  sans-serif; font-size:  medium">
+                <strong>Objetivos:</strong> <br/>
+                <br/>
+                &bull;  Aprendar los conceptos basicos de como crear menus, submenus e items de una aplicación web con Panel menu.<br/>
+                &bull;  Aprendar los conceptos basicos de comunición con bases de datos relacionales usuando JPA y procedimientos almacenados.<br/>
+                &bull;  Aprendar los conceptos basicos del uso de plantillas y contenedores con Java Server Faces.<br/>
+                &bull;  Aprendar a desplegar aplicaciones web Java EE con Wildfly Server y Payara Server.<br/>
+                <br/>
+                <strong>A que publico me dirijo:</strong><br/>
+                A programadores <strong>TRANSACCIONALES</strong>, cuyo consumidor final seran usuarios internos de aplicaciones
+                web.<br/>
+
+                no son para marketing digital ó leading pages o modulos CRM bootcam o chatRoom.<br/>
+                <br/> 
+                <strong>Consideraciones:</strong><br/>
+
+                Estas lecciones son para programadores que estaran trabajando 
+                con usuario internos de aplicaciones web Java EE modulares o monoliticas <br/>
+                <br/>
+                <strong>Nivel:</strong><br/> 
+                Principiante
+                <br/><br/>
+                <strong>Base de datos:</strong><br/> 
+                Sql server 2017
+
+            </p>
+
+        </h:body>
+    </ui:define>
+
+</ui:composition>

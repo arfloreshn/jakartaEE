@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="../WEB-INF/plantillas/frmPlantillaMenus.xhtml">
+
+    <ui:define name="content">
+
+        <h:body>
+            <p:outputPanel style="display:block">
+                <h2 style="text-align: center">Introducci&oacute;n a SOA</h2>
+            </p:outputPanel>
+
+            <p:panel  header="JAX-RS &oacute; Protocologo REST">
+                <p:link outcome="jax_rs/frmClienteRS" value="Cliente JAX-RS">
+                    <f:param name="lbl" value="JAX-RS"/>
+                    <f:param name="mnu" value="leccion_11"/>
+                    <f:param name="opt" value="leccion_11"/>
+                </p:link>
+
+                En la actualiadad las normativas JAVA EE y Microprofile, han definido con el estandar base 
+                de trabajo Restful, ya que en la actualidad la gran mayoria de aplicaciones web comparten
+                su informacion en fortmato JSON.
+
+                Este el estandar actual para el intercambio de informacion entre diferentes aplicaciones.
+
+                SOAP, en la actualidad se considera casi un metodo heredado, calificando como es deshuso.
+            </p:panel><br/>
+
+            <p:panel header="JAX-WS &oacute; Protocologo SOAP">
+                <p:link outcome="jax_ws/frmClienteWS" value="Cliente JAX-WS">
+                    <f:param name="lbl" value="JAX-WS"/>
+                    <f:param name="mnu" value="leccion_11"/>
+                    <f:param name="opt" value="leccion_11"/>
+                </p:link>
+                Para efectos de este curso y para programadores que provienen de entornos Microsoft, realice un
+                aparatado para Webservices.
+                Pero debo de aclarar que este apartado de Webservices para entornos Java EE y Jakarta, esta descontinuado
+                apartir de la version 9 de Java EE y posteriores.
+                Los componentes Webservices deberan ser instalados e implementados por separado, en las versiones de
+                Java 9 y posteriores.
+            </p:panel><br/>
+            <!-- comment -->
+            <p style="font-family:  sans-serif; font-size:  medium">
+                <strong>Objetivo:</strong> <br/>
+                <br/>
+                &bull;  Esta dos (2) lecciones son una introduccion pequenia a dos componentes las arquitecturas SOA.<br/>
+                &bull;  Como 1ra opcion presentamos JAX-RS o RESTFUL, esto obdecen a las exigensias de cambio en el mercado actual.<br/>
+                &bull;  Como 2da opcion presentamos JAX-WS o SOAP(RPC), y esto tambien obedece a los cambios y estandares del mercado JAVA.<br/>
+                &bull;  Aprendar a consumir Endpoints con ambos metodos.<br/>
+                <br/>
+                <strong>A que publico me dirijo:</strong><br/>
+                A programadores <strong>TRANSACCIONALES</strong>, cuyo consumidor final seran usuarios internos de aplicaciones
+                web.<br/>
+
+                no son para marketing digital ó leading pages o modulos CRM bootcam o chatRoom.<br/>
+                <br/> 
+                <strong>Consideraciones:</strong><br/>
+
+                Estas dos (2) lecciones son para programadores que estaran trabajando 
+                con usuario internos de aplicaciones web Java EE modulares o monoliticas <br/>
+                <br/>
+                <strong>Nivel:</strong><br/> 
+                Medio
+                <br/><br/>
+                <strong>Base de datos:</strong><br/> 
+                Sql server 2017
+
+            </p>
+
+        </h:body>
+    </ui:define>
+
+</ui:composition>
