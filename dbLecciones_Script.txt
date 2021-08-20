@@ -1,4 +1,4 @@
-USE [dbLeccion2]
+USE [dbLecciones]
 GO
 /****** Object:  Table [dbo].[cat_productos]    Script Date: 12/8/2021 17:49:32 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[cat_productos]') AND type in (N'U'))
