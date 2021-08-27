@@ -1,0 +1,262 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Jakarta EE</title>
+
+        <h:outputStylesheet name="css/primeflex/primeflex.min.css"/>
+        <h:outputStylesheet name="css/semantic/semantic.min.css"/>
+        <h:outputStylesheet name="css/template.css"/>
+
+    </h:head>
+
+    <h:body>
+
+        <input type="checkbox" id="check"/>
+
+        <label for="check">
+            <i class="fa fa-chevron-circle-right" id="btn-show"></i>
+            <i class="fa fa-chevron-circle-left" id="btn-hide"></i>
+        </label>
+
+
+        <div class="encabezado">
+
+            <!-- <h:graphicImage library="img"   style="position: absolute; z-index: 5; top: 0%;left:95%;"
+                            name="bandera.JPG" height="40" width="70"/> -->
+
+            <nav class="nav_style">
+                <ul>
+                    <li><a href="#" class="logo">Jakarta EE</a></li>
+                    <li><a href="#">ABM</a>
+                        <ul>
+                            <li><a href="#">Impuestos</a></li>
+                            <li><a href="#">Periodos Contable</a></li>
+                            <li><a href="#">Sucursales</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Tareas</a>
+                        <ul>
+                            <li><a href="#">Cambio de divisa</a></li>
+                            <li><a href="#">Asientos contables</a></li>
+                            <li><a href="#">Cierre caja</a></li>
+                            <li><a href="#">Cierre mensual</a></li>
+                            <li><a href="#">Cierre anual</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Reportes</a>
+                        <ul>
+                            <li><a href="#">Partidas de diario</a></li>
+                            <li><a href="#">Saldos ajustados</a></li>
+                            <li><a href="#">Mayores</a></li>
+                            <li><a href="#">Balance Financiero</a></li>
+                            <li><a href="#">Estado Perdidas y Ganacias</a></li>
+                        </ul>
+                    </li>
+
+                    <div class="lg-ritgh">
+                        <li><a href="#"><i class="fa fa-user"/> Usuario</a>
+                            <ul>
+                                <li> <a href="#"><i class="fa fa-lock"/> Cambio de clave</a></li>
+                                <li><a href="#"><i class="fa fa-google-plus-circle"/> Mensaje</a></li>
+                                <li><a href="#"><i class="fa fa-sign-out"/> Salir</a></li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+            </nav>
+
+        </div>
+
+        <div class="sidebar">
+
+            <p:panelMenu>
+                <p:submenu label="Lecci&oacute;n 1 formulario simple" style="background-color: #E6E6EA;"> 
+                    <p:menuitem value="Crear un registro"  outcome="/leccion1/frmRegistrarPais"   icon="pi pi-save">
+                        <f:param name="lbl" value="Crear pais"/>
+                        <f:param name="mnu" value="leccion1"/>
+                        <f:param name="opt" value="leccion1"/>
+                    </p:menuitem>
+                    <p:menuitem value="Buscar resgistro" outcome="/leccion1/frmBuscarPais"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Buscar pais"/>
+                        <f:param name="mnu" value="leccion1"/>
+                        <f:param name="opt" value="leccion1"/>
+                    </p:menuitem>
+                    <p:menuitem value="Editar registro" outcome="/leccion1/frmEditarPais"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Buscar pais"/>
+                        <f:param name="mnu" value="leccion1"/>
+                        <f:param name="opt" value="leccion1"/>
+                    </p:menuitem>
+                    <p:menuitem value="Borrar un registros" outcome="/leccion1/frmBorrarPais"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Borrar pais"/>
+                        <f:param name="mnu" value="leccion1"/>
+                        <f:param name="opt" value="leccion1"/>
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Lecci&oacute;n 2 formulario de busquedas" style="background-color: #E6E6EA;">
+                    <p:menuitem value="Buscar un cadena de texto" outcome="/leccion2/frmBuscarCadena"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Buscar cadena"/>
+                        <f:param name="mnu" value="leccion2"/>
+                        <f:param name="opt" value="leccion2"/>
+                    </p:menuitem>
+                    <p:menuitem value="Buscar un entero" outcome="/leccion2/frmBuscarCodigo"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Buscar un entero"/>
+                        <f:param name="mnu" value="leccion2"/>
+                        <f:param name="opt" value="leccion2"/>
+                    </p:menuitem>
+                    <p:menuitem value="Buscar rango de fecha" outcome="/leccion2/frmBuscarFechas"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Buscar rango de fechas"/>
+                        <f:param name="mnu" value="leccion2"/>
+                        <f:param name="opt" value="leccion2"/>
+                    </p:menuitem>
+                </p:submenu>
+                <p:submenu label="Lecci&oacute;n 3 parametros">
+                    <p:menuitem value="Enviar parametros metodo GET" outcome="/leccion3/metodoGet/frmEnviarParametros"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Enviar parametros por GET"/>
+                        <f:param name="mnu" value="leccion3"/>
+                        <f:param name="opt" value="leccion3"/>
+                    </p:menuitem>
+                    <p:menuitem value="Enviar parametros metodo SESSION" outcome="/leccion3/metodoSession/frmEnviarParametrosSession"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Enviar parametros por SESSION"/>
+                        <f:param name="mnu" value="leccion3"/>
+                        <f:param name="opt" value="leccion3"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 4 formulario transaccional">
+                    <p:menuitem value="Uso de componetes" outcome="/leccion4/frmUsodeComponentes"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Uso de componetes"/>
+                        <f:param name="mnu" value="leccion4"/>
+                        <f:param name="opt" value="leccion4"/>
+                    </p:menuitem>
+                    <p:menuitem value="Validar formulario" outcome="/leccion4/frmValidarFormulario"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Validar formulario"/>
+                        <f:param name="mnu" value="leccion4"/>
+                        <f:param name="opt" value="leccion4"/>
+                    </p:menuitem>
+                </p:submenu>
+
+
+                <p:submenu label="Lecci&oacute;n 5 listados">
+                    <p:menuitem value="Listado de paises" outcome="/leccion5/frmListadoPaises"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Listado de paises"/>
+                        <f:param name="mnu" value="leccion5"/>
+                        <f:param name="opt" value="leccion5"/>
+                    </p:menuitem>
+                    <p:menuitem value="Listado de vacunaci&oacute;n" outcome="/leccion5/frmListadoVacunacion"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Listado de vacunaci&oacute;"/>
+                        <f:param name="mnu" value="leccion5"/>
+                        <f:param name="opt" value="leccion5"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 6 relaciones">
+                    <p:menuitem value="Relaci&oacute;n uno a uno" outcome="/leccion6/frmRelacionUnoAUno"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Relaci&oacute;n uno a uno"/>
+                        <f:param name="mnu" value="leccion6"/>
+                        <f:param name="opt" value="leccion6"/>
+                    </p:menuitem>
+                    <p:menuitem value="Relaci&oacute;n uno a muchos" outcome="/leccion6/frmRelacionUnoAMuchos"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Relaci&oacute;n muchos a uno"/>
+                        <f:param name="mnu" value="leccion6"/>
+                        <f:param name="opt" value="leccion6"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 7 graficos">
+                    <p:menuitem value="Grafico de barra" outcome="/leccion7/frmGraficoBarra"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Grafico de barra"/>
+                        <f:param name="mnu" value="leccion7"/>
+                        <f:param name="opt" value="leccion7"/>
+                    </p:menuitem>
+                    <p:menuitem value="Grafico de pastel" outcome="/leccion7/frmGraficoPastel"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Grafico de pastel"/>
+                        <f:param name="mnu" value="leccion7"/>
+                        <f:param name="opt" value="leccion7"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 8 Menus">
+                    <p:menuitem value="Menu Panel" outcome="/leccion8/MenuPanel/MenuPanel"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Menu Panel"/>
+                        <f:param name="mnu" value="leccion8"/>
+                        <f:param name="opt" value="leccion8"/>
+                    </p:menuitem>
+                    <p:menuitem value="Menu Tree" outcome="/leccion8/MenuTree/MenuTree"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Menu Tree"/>
+                        <f:param name="mnu" value="leccion8"/>
+                        <f:param name="opt" value="leccion8"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 9 Store Procedure">
+                    <p:menuitem value="Consumir una funci&oacute;n" outcome="/leccion9/frmConsumirFuncion"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Consumir una funci&oacute;n"/>
+                        <f:param name="mnu" value="leccion9"/>
+                        <f:param name="opt" value="leccion9"/>
+                    </p:menuitem>
+                    <p:menuitem value="Consumir un SP" outcome="/leccion9/frmConsumirSP"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Consumir un SP"/>
+                        <f:param name="mnu" value="leccion9"/>
+                        <f:param name="opt" value="leccion9"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 10 Subir Imagen">
+                    <p:menuitem value="Subir archivos de Imagen" outcome="/leccion_10/frmSubirImagen"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Subir imagen"/>
+                        <f:param name="mnu" value="leccion_10"/>
+                        <f:param name="opt" value="leccion_10"/>
+                    </p:menuitem>
+                </p:submenu>
+
+                <p:submenu label="Lecci&oacute;n 11 Introducci&oacute;n a SOA">
+                    <p:menuitem value="Instroducci&oacute;n a SOA" outcome="/leccion_11/frmSOA"  icon="pi pi-upload">
+                        <f:param name="lbl" value="SOA"/>
+                        <f:param name="mnu" value="leccion_11"/>
+                        <f:param name="opt" value="leccion_11"/>
+                    </p:menuitem>
+                </p:submenu>
+
+
+                <p:submenu label="Lecci&oacute;n 12 Introducci&oacute;n a Websocket">
+                    <p:menuitem value="Instroducci&oacute;n a Websocket o aplicaciones en tiempo real" outcome="/leccion_12/frmAvisosWebSocket"  icon="pi pi-upload">
+                        <f:param name="lbl" value="Websocket"/>
+                        <f:param name="mnu" value="leccion_12"/>
+                        <f:param name="opt" value="leccion_12"/>
+                    </p:menuitem>
+                </p:submenu>
+
+            </p:panelMenu>
+
+        </div>
+
+
+        <section>
+            <div class="contenido">
+                <p:breadCrumb   model="#{menuBreadCrumbView.breadCrumbModel}" 
+                                style="border:none;" />
+
+                <ui:insert name="content"></ui:insert>
+
+            </div>
+
+
+        </section>
+
+        <footer>
+            <h:graphicImage library="img"   style="position: absolute; z-index: 5; top: 90%;left:93%;"
+                            name="heroeJava.png" height="40" width="70"/>
+        </footer>
+
+
+    </h:body>
+
+</html>

@@ -173,6 +173,13 @@
             <version>2.8.2</version>
             <type>jar</type>
         </dependency>
+        <!--  font-awesome  -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

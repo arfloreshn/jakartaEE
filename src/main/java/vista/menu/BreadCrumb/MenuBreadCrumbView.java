@@ -62,7 +62,7 @@ public class MenuBreadCrumbView {
      if (var_Tipo == null || var_Tipo == OpcionTipo.Main) {
           return null;
       }*/
-        addItemToMenuModel(model, "Home", "/Formularios/index.xhtml", false);
+        addItemToMenuModel(model, "Home", "/jakartaEE/index.xhtml", false);
 
         switch (var_Tipo) {
             case leccion1:

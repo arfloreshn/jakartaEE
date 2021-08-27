@@ -18,9 +18,14 @@
     <!-- Template de presentacion del Primeface 10 -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>nova-colored</param-value>
+        <param-value>nova-light</param-value>
     </context-param>
-      <!-- -Mapear todos los archivos con extension .xhtml y publicarlos como servlet con extension JSF-->
+     <!--Activar uso Font Awesome -->
+    <context-param>
+        <param-name>primefaces.FONT_AWESOME</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <!-- -Mapear todos los archivos con extension .xhtml y publicarlos como servlet con extension JSF-->
     <servlet-mapping>
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
