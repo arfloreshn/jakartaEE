@@ -41,7 +41,7 @@ public class paisImpl implements pais {
     @Override
     public List<CatPais> ListarPaises() {
         var_lista = new ArrayList<>();
-        var_lista = paisControl.findAll();
+        var_lista = paisControl.ListarTodo();
         return var_lista;
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.entidades.operativas;
+package vista.entidades.transaccionales;
 
 import controladores.entidades.referenciales.CatalagoPersonasControl;
 import controladores.entidades.referenciales.CatalagoProductosControl;

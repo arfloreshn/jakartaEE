@@ -45,7 +45,7 @@ public class PaisView implements Serializable {
     }
 
     public List<CatPais> getLista() {
-        return servicioPais.findAll();
+        return servicioPais.ListarTodo();
     }
 
     public String cmdGrabarRegistro() {

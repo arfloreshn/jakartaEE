@@ -23,7 +23,7 @@ public class CentrosAtencionControl {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbLeccionesPU");
     EntityManager em = emf.createEntityManager();
 
-    CatCeaten objHospital;
+    CatCeaten entidad;
     List<CatCeaten> lstHospital;
 
     public CatCeaten crearRegistro(CatCeaten obj) {
@@ -41,14 +41,15 @@ public class CentrosAtencionControl {
 
     }
 
+    
     public CatCeaten editarRegistro(CatCeaten obj) {
-        objHospital = buscarRegistro(obj.getCeatenID().toString());
+        entidad = buscarRegistro(obj.getCeatenID().toString());
 
-        objHospital.setCeatenID(obj.getCeatenID());
-        objHospital.setDescripcionCeaten(obj.getDescripcionCeaten());
-        try {
+         entidad.setDescripcionCeaten(obj.getDescripcionCeaten());
+       
+         try {
             em.getTransaction().begin();
-            em.merge(objHospital);
+            em.merge(entidad);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -56,14 +57,14 @@ public class CentrosAtencionControl {
             }
         }
 
-        return objHospital;
+        return entidad;
     }
 
     public boolean quitarRegistro(String id) {
-        objHospital = buscarRegistro(id);
+        entidad = buscarRegistro(id);
         try {
             em.getTransaction().begin();
-            em.remove(objHospital);
+            em.remove(entidad);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -79,13 +80,13 @@ public class CentrosAtencionControl {
     }
 
     public CatCeaten buscarRegistro(String id) {
-        objHospital = new CatCeaten();
-        objHospital = em.find(CatCeaten.class, Integer.valueOf(id));
+        entidad = new CatCeaten();
+        entidad = em.find(CatCeaten.class, Integer.valueOf(id));
 
-        if (objHospital == null) {
-            return objHospital; //throw new msjDataVacia("Pais no encontrado");
+        if (entidad == null) {
+            return entidad; //throw new msjDataVacia("Pais no encontrado");
         } else {
-            return objHospital;
+            return entidad;
         }
 
     }

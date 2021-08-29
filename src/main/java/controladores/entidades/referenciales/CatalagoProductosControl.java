@@ -25,7 +25,7 @@ public class CatalagoProductosControl {
     EntityManager em = emf.createEntityManager();
     EntityTransaction tx = em.getTransaction();
 
-    private CatProductos producto;
+    private CatProductos entidad;
     
     public List<CatProductos> ListarTodo() {
         Query Qry = em.createNamedQuery("CatProductos.ListarTodo", CatProductos.class);
@@ -33,23 +33,27 @@ public class CatalagoProductosControl {
     }
 
     public CatProductos buscarRegistro(String id) {
-        CatProductos obj = new CatProductos();
-        obj = em.find(CatProductos.class, Integer.valueOf(id));
-        if (obj == null) {
-            return obj; //throw new msjDataVacia("Pais no encontrado");
+        entidad = new CatProductos();
+       entidad = em.find(CatProductos.class, Integer.valueOf(id));
+        if (entidad == null) {
+            return entidad; //throw new msjDataVacia("Pais no encontrado");
         } else {
-            return obj;
+            return entidad;
         }
     }
          
     public CatProductos editarRegistro(CatProductos pro){
 
-        producto = buscarRegistro(pro.getProductoId().toString());
-        producto.setNomFoto(pro.getNomFoto());
+        entidad = new CatProductos();
+        entidad = buscarRegistro(pro.getProductoId().toString());
+        
+        entidad.setCodBarra(pro.getCodBarra());
+        entidad.setCostoVta(pro.getCostoVta());
+        entidad.setNomFoto(pro.getNomFoto());
 
         try {
             em.getTransaction().begin();
-            em.merge(producto);
+            em.merge(entidad);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -57,22 +61,37 @@ public class CatalagoProductosControl {
             }
         }
 
-        return producto;
+        return entidad;
     }
 
+      public boolean quitarRegistro(String id) {
+        entidad = buscarRegistro(id);
+        try {
+            em.getTransaction().begin();
+            em.remove(entidad);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        }
+        return true;
+    }
+    
+    
     public CatProductos buscarCodBarra(String codBarra) {
 
-         CatProductos obj = new CatProductos();
+         entidad = new CatProductos();
       
         Query Qry = em.createNamedQuery("CatProductos.BuscarCodigoBarra", CatProductos.class)
                 .setParameter("codbarra", codBarra);
 
-         obj = (CatProductos) Qry.getSingleResult();
+         entidad = (CatProductos) Qry.getSingleResult();
      
-        if (obj == null) {
-            return obj; //throw new msjDataVacia("Pais no encontrado");
+        if (entidad == null) {
+            return entidad; //throw new msjDataVacia("Pais no encontrado");
         } else {
-            return obj;
+            return entidad;
         }
 
     }

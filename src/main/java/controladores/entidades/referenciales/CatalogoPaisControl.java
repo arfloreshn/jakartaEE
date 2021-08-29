@@ -29,7 +29,7 @@ public class CatalogoPaisControl  {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("dbLeccionesPU");
     EntityManager em = emf.createEntityManager();
 
-    CatPais objPais;
+    CatPais entidad;
     List<CatPais> lstPaises;
 
   
@@ -49,13 +49,13 @@ public class CatalogoPaisControl  {
     }
 
     public CatPais editarRegistro(CatPais obj) {
-        objPais = buscarRegistro(obj.getPaisId().toString());
+        entidad = buscarRegistro(obj.getPaisId().toString());
 
-        objPais.setPaisId(obj.getPaisId());
-        objPais.setDescripPais(obj.getDescripPais());
+        entidad.setDescripPais(obj.getDescripPais());
+    
         try {
             em.getTransaction().begin();
-            em.merge(objPais);
+            em.merge(entidad);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -63,14 +63,14 @@ public class CatalogoPaisControl  {
             }
         }
 
-        return objPais;
+        return entidad;
     }
 
     public boolean quitarRegistro(String id) {
-        objPais = buscarRegistro(id);
+        entidad = buscarRegistro(id);
         try {
             em.getTransaction().begin();
-            em.remove(objPais);
+            em.remove(entidad);
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
@@ -81,19 +81,19 @@ public class CatalogoPaisControl  {
     }
 
      @XmlElement
-    public List<CatPais> findAll() {
+    public List<CatPais> ListarTodo() {
         Query Qry = em.createNamedQuery("CatPais.ListarTodo", CatPais.class);
         return Qry.getResultList();
     }
 
     public CatPais buscarRegistro(String id) {
-        objPais = new CatPais();
-         objPais  = em.find(CatPais.class, Integer.valueOf(id));
+        entidad = new CatPais();
+         entidad  = em.find(CatPais.class, Integer.valueOf(id));
 
-        if (objPais == null) {
-            return objPais; //throw new msjDataVacia("Pais no encontrado");
+        if (entidad == null) {
+            return entidad; //throw new msjDataVacia("Pais no encontrado");
         } else {
-            return objPais;
+            return entidad;
         }
 
     }

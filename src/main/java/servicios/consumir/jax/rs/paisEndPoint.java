@@ -86,7 +86,7 @@ public class paisEndPoint {
 
     @GET
     public List<CatPais> listarRegistros() {
-        return paisServicio.findAll();
+        return paisServicio.ListarTodo();
     }
 
     @GET
