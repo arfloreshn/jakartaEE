@@ -1,7 +1,7 @@
 # Jakarta EE 8 y Primefaces 10
 
 Modulo de capacitación y actualización de Jakarta EE y Primefaces 10
-este proyecto solo trata la normativa JSR-372.
+este proyecto cubre la normativa JSR-372 o Java Server Faces version 2.3.
 
 # Requisitos
 
