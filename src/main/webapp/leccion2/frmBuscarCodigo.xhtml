@@ -21,13 +21,14 @@
 
                 <h:panelGrid columns="4" style="margin-top: 5px" >
                     <label for="codigoPais">Codigo Pais.:</label>
-                    <p:inputText id="codigoPais" type="text" value="#{PaisView.var_codigoPais}" size="20" placeholder="Ingrese un numero"  />
+                    
+                    <p:inputText id="codigoPais" type="text" value="#{buscarEntero.var_codigoPais}" size="20" placeholder="Ingrese un numero"  />
 
                     <p:commandButton value="Buscar"
                                      style="margin-left: 5px;"
                                      styleClass="rounded-button ui-button-success" >
 
-                        <p:ajax   listener="#{PaisView.cmdBuscarPaisPorCodigo}" 
+                        <p:ajax   listener="#{buscarEntero.cmdBuscarPorCodigo}" 
                                   event="click" 
                                   process="@this,codigoPais"
                                   partialSubmit="true"
@@ -51,7 +52,7 @@
 
                 <div class="p-field ui-fluid">
                     <label for="lblresultado">Pa&iacute;s encontrado</label>
-                    <p:inputText id="lblresultado" type="text" value="#{PaisView.var_pais.descripPais}" />
+                    <p:inputText id="lblresultado" type="text" value="#{buscarEntero.var_pais.descripPais}" />
                 </div>
             </h:form>
 

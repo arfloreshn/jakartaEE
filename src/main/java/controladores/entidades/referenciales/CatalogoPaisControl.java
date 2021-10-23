@@ -86,8 +86,9 @@ public class CatalogoPaisControl  {
         return Qry.getResultList();
     }
 
+    
     public CatPais buscarRegistro(String id) {
-        entidad = new CatPais();
+         entidad = new CatPais();
          entidad  = em.find(CatPais.class, Integer.valueOf(id));
 
         if (entidad == null) {

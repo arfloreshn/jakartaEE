@@ -30,8 +30,7 @@ public class busquedaPorCodigoView implements Serializable {
     CatalogoPaisControl servicioPais;
 
     private List<CatPais> Lista;
-    private CatPais var_pais;
-    private CatPais var_data;
+    private CatPais var_pais = new CatPais();
     boolean snExisto = false;
 
     private String var_codigoPais = null;
@@ -40,18 +39,15 @@ public class busquedaPorCodigoView implements Serializable {
     public void init() {
         this.snExisto = false;
         this.snBloquearCmdEditar = true;
-        var_codigoPais = "";
-        var_pais = new CatPais();
-        var_data = new CatPais();
-
+       this.var_codigoPais = "";
     }
 
     public void cmdBuscarPorCodigo() {
         this.snBloquearCmdEditar = true;
-        var_pais = new CatPais();
-        var_pais = servicioPais.buscarRegistro(var_codigoPais);
+        this.var_pais = new CatPais();
+        this.var_pais = servicioPais.buscarRegistro(var_codigoPais);
 
-        if (var_pais != null) {
+        if (this.var_pais != null) {
             this.snBloquearCmdEditar = false;
             addMessage(FacesMessage.SEVERITY_INFO, "Registro encontrado", "Proceso exitoso");
         } else {
@@ -60,6 +56,8 @@ public class busquedaPorCodigoView implements Serializable {
 
     }
 
+    
+    
     public String getVar_codigoPais() {
         return var_codigoPais;
     }
@@ -68,6 +66,13 @@ public class busquedaPorCodigoView implements Serializable {
         this.var_codigoPais = var_codigoPais;
     }
 
+    
+    
+    public CatPais getVar_pais() {
+        return var_pais;
+    }
+
+   
 
     public void limpiarFormulario() {
         var_pais = new CatPais();
