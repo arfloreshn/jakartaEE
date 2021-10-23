@@ -58,6 +58,8 @@ public class MaestroVacunacionControl {
         return Qry.getResultList();
     }
 
+    
+    
     public List<CatVacunas> listarVacunas() {
         Query Qry = em.createNamedQuery("CatVacunas.ListarTodo", CatVacunas.class);
         return Qry.getResultList();

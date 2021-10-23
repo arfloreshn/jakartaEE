@@ -38,43 +38,53 @@ import javax.validation.constraints.Size;
 public class MaeVacunacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "vacunacion_id")
     private Integer vacunacionId;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "nombrePaciente")
     private String nombrePaciente;
+    
     @Size(max = 20)
     @Column(name = "dni")
     private String dni;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "edad")
     private int edad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "estatura")
     private BigDecimal estatura;
+    
     @Column(name = "peso")
     private BigDecimal peso;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "sn_preexistencia")
     private Character snPreexistencia;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "estado_civil")
     private Character estadoCivil;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "fec_vacunacion")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecVacunacion;
+    
     @Column(name = "fec_proxima_dosis")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecProximaDosis;

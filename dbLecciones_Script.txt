@@ -96,6 +96,28 @@ CREATE TABLE [dbo].[personas_mae](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[personas_direccion]    Script Date: 22/10/2021 18:03:41 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[personas_direccion]') AND type in (N'U'))
+DROP TABLE [dbo].[personas_direccion]
+GO
+CREATE TABLE [dbo].[personas_direccion](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[persona_id] [int] NOT NULL,
+	[lugar_nacimiento] [varchar](500) NULL,
+	[direccion] [varchar](500) NULL,
+	[telefono] [varchar](50) NULL,
+ CONSTRAINT [PK_personas_direccion] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[personas_direccion]  WITH CHECK ADD  CONSTRAINT [FK_PersonasDireccion] FOREIGN KEY([persona_id])
+REFERENCES [dbo].[personas_mae] ([persona_id])
+GO
+ALTER TABLE [dbo].[personas_direccion] CHECK CONSTRAINT [FK_PersonasDireccion]
+GO
 ALTER TABLE [dbo].[factura_mae] DROP CONSTRAINT [FK_personas_mae]
 GO
 /****** Object:  Table [dbo].[factura_mae]    Script Date: 12/8/2021 17:53:16 ******/
@@ -156,6 +178,36 @@ REFERENCES [dbo].[factura_mae] ([factura_id])
 GO
 
 ALTER TABLE [dbo].[factura_det] CHECK CONSTRAINT [FK_factura_det]
+GO
+
+/****** Object:  Table [dbo].[vacunacion_mae]    Script Date: 22/10/2021 18:06:32 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[vacunacion_mae]') AND type in (N'U'))
+DROP TABLE [dbo].[vacunacion_mae]
+GO
+CREATE TABLE [dbo].[vacunacion_mae](
+	[vacunacion_id] [int] IDENTITY(1,1) NOT NULL,
+	[nombrePaciente] [varchar](50) NOT NULL,
+	[dni] [varchar](20) NULL,
+	[edad] [int] NOT NULL,
+	[estatura] [decimal](18, 2) NOT NULL,
+	[peso] [numeric](18, 2) NULL,
+	[sn_preexistencia] [char](1) NOT NULL,
+	[estado_civil] [char](1) NOT NULL,
+	[cesamoID] [int] NOT NULL,
+	[vacunaID] [int] NOT NULL,
+	[fec_vacunacion] [datetime] NOT NULL,
+	[fec_proxima_dosis] [datetime] NULL,
+ CONSTRAINT [PK_mae_reg_vacunacion] PRIMARY KEY CLUSTERED 
+(
+	[vacunacion_id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[vacunacion_mae]  WITH CHECK ADD FOREIGN KEY([cesamoID])
+REFERENCES [dbo].[cat_ceaten] ([ceatenID])
+GO
+ALTER TABLE [dbo].[vacunacion_mae]  WITH CHECK ADD FOREIGN KEY([vacunaID])
+REFERENCES [dbo].[cat_vacunas] ([vacunaID])
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID('[dbo].[fn_sumar]'))
 DROP function [dbo].[fn_sumar]

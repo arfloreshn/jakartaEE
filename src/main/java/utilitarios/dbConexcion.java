@@ -41,7 +41,6 @@ public class dbConexcion {
                 if (properties != null) {
 
                     properties.load(inputStream);
-
                     String dbDriver = properties.getProperty("dbDriver");
                     String connectionUrl = properties.getProperty("connectionUrl");
                     String user = properties.getProperty("user");

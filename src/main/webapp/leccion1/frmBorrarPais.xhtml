@@ -17,10 +17,14 @@
                 <h:panelGrid columns="5">
                     <label for="codigoPais">Codigo Pais</label>
                     <p:inputText id="codigoPais" type="text" value="#{PaisView.var_codigoPais}" />
+                  
                     <p:commandButton value="Buscar" 
                                      action="#{PaisView.cmdBuscarPaisPorCodigo}"
                                      update=":frmResultado,cmdborrar"
                                      styleClass="rounded-button ui-button-success"/>
+                    
+                    
+                    
                     <p:commandButton id="cmdborrar" value="Borrar" 
                                      action="#{PaisView.cmdBorrarRegistro}"
                                      disabled="#{paisView.snBloquearCmdEditar}" update="frmResultado"

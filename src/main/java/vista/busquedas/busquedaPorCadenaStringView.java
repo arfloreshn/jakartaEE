@@ -21,7 +21,7 @@ import model.MaeVacunacion;
  *
  * @author AllanRamiro
  */
-@Named(value="buscarPacienteView")
+@Named(value = "buscarPacienteView")
 @ViewScoped
 public class busquedaPorCadenaStringView implements Serializable {
 
@@ -37,8 +37,19 @@ public class busquedaPorCadenaStringView implements Serializable {
 
     @PostConstruct
     public void init() {
-         var_descripcion = "";
-         this.Lista = new ArrayList<MaeVacunacion>();
+        var_descripcion = "";
+        this.Lista = new ArrayList<MaeVacunacion>();
+    }
+
+    public void cmdBuscarPacientePorNombre() {
+        Lista = vacunacionControl.buscarPorDescripcion(var_descripcion);
+
+        if (Lista.size() != 0) {
+            addMessage(FacesMessage.SEVERITY_INFO, "Registro encontrado", "Proceso exitoso");
+        } else {
+            addMessage(FacesMessage.SEVERITY_WARN, "Registro no encontrado", "Fallo de dato");
+        }
+
     }
 
     public String getVar_descripcion() {
@@ -49,23 +60,8 @@ public class busquedaPorCadenaStringView implements Serializable {
         this.var_descripcion = var_descripcion;
     }
 
-    
-    
-    
-    public void cmdBuscarPacientePorNombre() {
-        Lista = vacunacionControl.buscarPorDescripcion(var_descripcion);
-
-        if (Lista.size() !=0) {
-            addMessage(FacesMessage.SEVERITY_INFO, "Registro encontrado", "Proceso exitoso");
-        } else {
-            addMessage(FacesMessage.SEVERITY_WARN, "Registro no encontrado", "Fallo de dato");
-        }
-
-    }
-
-
-    public void limpiarFormulario() {
-          this.Lista = new ArrayList<MaeVacunacion>();
+    public List<MaeVacunacion> getLista() {
+        return Lista;
     }
 
     public void addMessage(FacesMessage.Severity severity, String summary, String detail) {
@@ -73,15 +69,8 @@ public class busquedaPorCadenaStringView implements Serializable {
                 addMessage(null, new FacesMessage(severity, summary, detail));
     }
 
-    public List<MaeVacunacion> getLista() {
-        return Lista;
+    public void limpiarFormulario() {
+        this.Lista = new ArrayList<MaeVacunacion>();
     }
 
-    public void setLista(List<MaeVacunacion> Lista) {
-        this.Lista = Lista;
-    }
-
-    
-    
-    
 }

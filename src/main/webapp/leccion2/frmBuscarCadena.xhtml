@@ -19,13 +19,15 @@
 
                 <p:growl id="growl" showDetail="true" />
 
+                
                 <h:panelGrid columns="4" style="margin-top: 5px" >
                     <label for="lbldescripcion">Nombre del Paciente.:</label>
+                    
                     <p:inputText id="lbldescripcion" type="text" value="#{buscarPacienteView.var_descripcion}" 
                                  size="50" placeholder="Escriba el nombre del paciente"  />
 
                     <p:commandButton value="Buscar" 
-                                     styleClass="rounded-button ui-button-success" >
+                                     styleClass="rounded-button ui-button-success"   >
 
                         <p:ajax   listener="#{buscarPacienteView.cmdBuscarPacientePorNombre}" 
                                   event="click" 
@@ -45,22 +47,27 @@
 
 
             </h:form>
+            
             <p:divider/>
 
             <h:form id="frmResultado">
 
-                <p:dataTable id="tb" value="#{buscarPacienteView.lista}" 
+                <p:dataTable id="tb"
+                             value="#{buscarPacienteView.lista}" 
                              var="paciente" 
                              rows="8"
                              paginator="true"
                              size="small"
                              >
+                   
                     <p:column   headerText="Expediente ID" style="width: 10%">
                         <h:outputText value="#{paciente.vacunacionId}" />
                     </p:column>
+                    
                     <p:column   headerText="Paciente" >
                         <h:outputText value="#{paciente.nombrePaciente}" />
                     </p:column>
+                    
                 </p:dataTable>
             </h:form>
 

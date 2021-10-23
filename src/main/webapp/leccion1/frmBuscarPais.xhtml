@@ -20,8 +20,9 @@
                 <p:growl id="growl" showDetail="true" />
                 
                 <h:panelGrid columns="4" style="margin-top: 5px" >
-                    <label for="codigoPais">Codigo Pais.:</label>
-                    <p:inputText id="codigoPais" type="text" value="#{PaisView.var_codigoPais}" size="20" placeholder="Ingrese un numero"  />
+                    <h:outputLabel for="codigoPais">Codigo Pais.:</h:outputLabel>
+                    <p:inputText id="codigoPais" value="#{PaisView.var_codigoPais}" size="20" 
+                                 placeholder="Ingrese un numero"  />
 
                     <p:commandButton value="Buscar" 
                                      styleClass="rounded-button ui-button-success" >

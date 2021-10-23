@@ -47,6 +47,18 @@
             <version>${jakartaee-api.version}</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Librerias o core de Primefaces -->     
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+        <!-- Themes comunitario de Primefaces -->     
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>${all-themes.version}</version>
+        </dependency>
         <!-- Las dependencias para Sql Server  son lo jar de comunicion para Sql Server-->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -73,18 +85,6 @@
             <version>${microprofile.version}</version>
             <type>pom</type>
             <scope>provided</scope>
-        </dependency>
-        <!-- Librerias o core de Primefaces -->     
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>${primefaces.version}</version>
-        </dependency>
-        <!-- Themes comunitario de Primefaces -->     
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>all-themes</artifactId>
-            <version>${all-themes.version}</version>
         </dependency>
         <!-- Dependecias para exportar datos a formato PDF -->
         <dependency>
