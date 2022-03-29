@@ -20,8 +20,8 @@
         <primefaces.version>10.0.0</primefaces.version>
         <omnifaces.version>3.6.1</omnifaces.version>
         <all-themes.version>1.0.10</all-themes.version>
-        <sqlserver.version>9.2.1.jre11</sqlserver.version>
-        <hibernate-core.version>5.4.9.Final</hibernate-core.version>
+        <hibernate-core.version>5.6.7.Final</hibernate-core.version>
+        <sqlserver.version>9.4.0.jre8</sqlserver.version>
         <apache-httpclient.version>4.5.10</apache-httpclient.version>
         <junit-jupiter.version>5.7.2</junit-jupiter.version>
         <mockito-core.version>3.9.0</mockito-core.version>
@@ -46,18 +46,6 @@
             <artifactId>jakarta.jakartaee-api</artifactId>
             <version>${jakartaee-api.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <!-- Librerias o core de Primefaces -->     
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>${primefaces.version}</version>
-        </dependency>
-        <!-- Themes comunitario de Primefaces -->     
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>all-themes</artifactId>
-            <version>${all-themes.version}</version>
         </dependency>
         <!-- Las dependencias para Sql Server  son lo jar de comunicion para Sql Server-->
         <dependency>
@@ -85,6 +73,18 @@
             <version>${microprofile.version}</version>
             <type>pom</type>
             <scope>provided</scope>
+        </dependency>
+        <!-- Librerias o core de Primefaces -->     
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>${primefaces.version}</version>
+        </dependency>
+        <!-- Themes comunitario de Primefaces -->     
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>${all-themes.version}</version>
         </dependency>
         <!-- Dependecias para exportar datos a formato PDF -->
         <dependency>
@@ -142,6 +142,12 @@
             <version>3.0.0</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-ri</artifactId>
+            <version>2.3.1</version>
+            <type>pom</type>
+        </dependency>
         <!-- Dependencias para clientes JAX-RS de Apache-->
         <!-- Cliente apache-->
         <dependency>
@@ -173,13 +179,6 @@
             <version>2.8.2</version>
             <type>jar</type>
         </dependency>
-        <!--  font-awesome  -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>font-awesome</artifactId>
-            <version>4.7.0</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -191,24 +190,8 @@
                 <version>3.8.1</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
-                <configuration>
-                    <argLine>
-                        --illegal-access=permit
-                    </argLine>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.22.0</version>
-                <configuration>
-                    <argLine>
-                        --illegal-access=permit
-                    </argLine>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.sun.xml.ws</groupId>
